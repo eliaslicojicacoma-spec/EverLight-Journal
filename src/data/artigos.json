@@ -1,0 +1,59 @@
+[
+  { "id": "curso-ouvindo-voz-de-deus", "title": "Ouvindo a Voz de Deus", "category": "Estudos Bíblicos", "language": "pt", "url": "https://biblia.com.br/curso/ouvindo-a-voz-de-deus/" },
+  { "id": "biblia-com-br", "title": "Escola Bíblica (Bíblia.com.br)", "category": "Estudos Bíblicos", "language": "pt", "url": "https://biblia.com.br/" },
+
+  { "id": "biblia-facil-daniel", "title": "Bíblia Fácil — Daniel (Novo Tempo)", "category": "Profecia", "language": "pt", "url": "https://cursos.novotempo.com/biblia-facil-daniel/" },
+  { "id": "biblia-facil-apocalipse", "title": "Bíblia Fácil — Apocalipse (Novo Tempo)", "category": "Profecia", "language": "pt", "url": "https://cursos.novotempo.com/" },
+
+  { "id": "adv-esperanca", "title": "Verdade de Esperança (chatbot)", "category": "Evangelismo", "language": "pt", "url": "https://adv.st/esperanca" },
+  { "id": "estudos-adventistas", "title": "Estudos Adventistas", "category": "Cursos", "language": "pt", "url": "https://estudos.adventistas.org/" },
+
+  { "id": "revista-adventista", "title": "Revista Adventista", "category": "Periódicos", "language": "pt", "url": "https://revistaadventista.com.br/" },
+  { "id": "acervo-revista-adventista", "title": "Acervo Revista Adventista (CPB)", "category": "Periódicos", "language": "pt", "url": "https://acervo.cpb.com.br/ra" },
+
+  { "id": "vida-e-saude-novo", "title": "Revista Vida e Saúde (site)", "category": "Saúde", "language": "pt", "url": "https://novo.revistavidaesaude.com.br/" },
+  { "id": "vida-e-saude", "title": "Vida e Saúde (portal)", "category": "Saúde", "language": "pt", "url": "https://www.vidaesaude.com.br/" },
+
+  { "id": "revista-ministerio", "title": "Revista Ministério (portal)", "category": "Liderança", "language": "pt", "url": "https://ministeriopastoral.com.br/" },
+  { "id": "ministerio-acervo", "title": "Ministério: conteúdo online (notícia)", "category": "Liderança", "language": "pt", "url": "https://noticias.adventistas.org/pt/revista-ministerio-disponibiliza-conteudo-online/" },
+
+  { "id": "nosso-amiguinho", "title": "Nosso Amiguinho (site)", "category": "Infantil", "language": "pt", "url": "https://www.nossoamiguinho.com.br/" },
+  { "id": "nosso-amiguinho-cpb", "title": "Nosso Amiguinho (CPB)", "category": "Infantil", "language": "pt", "url": "https://nossoamiguinho.cpb.com.br/" },
+
+  { "id": "licao-cpb", "title": "Lição Adultos (CPB Mais)", "category": "Escola Sabatina", "language": "pt", "url": "https://mais.cpb.com.br/licao-adultos/" },
+  { "id": "downloads-adventistas", "title": "Downloads Oficiais (Adventistas.org)", "category": "Materiais", "language": "pt", "url": "https://downloads.adventistas.org/pt/" },
+
+  { "id": "hinario-adventista", "title": "Hinário Adventista", "category": "Adoração", "language": "pt", "url": "https://hinarioadventista.com.br/" },
+
+  { "id": "find-a-church", "title": "Encontre uma Igreja (mapa global)", "category": "Comunidade", "language": "en", "url": "https://adventist.org/find-a-church/" },
+
+  { "id": "adventist-world", "title": "Adventist World", "category": "Periódicos", "language": "en", "url": "https://adventistworld.org/" },
+
+  { "id": "feliz7play", "title": "Feliz7Play (streaming)", "category": "Mídia", "language": "pt", "url": "https://feliz7play.com/" },
+
+  { "id": "podcasts-feliz7", "title": "7Cast (podcasts)", "category": "Mídia", "language": "pt", "url": "https://feliz7play.com/pt/podcasts" },
+
+  { "id": "educacao-adventista", "title": "Educação Adventista", "category": "Educação", "language": "pt", "url": "https://educacaoadventista.org.br/" },
+
+  { "id": "adra-br", "title": "ADRA Brasil", "category": "Solidariedade", "language": "pt", "url": "https://adra.org.br/" },
+
+  { "id": "quero-vida-e-saude", "title": "Quero Vida e Saúde", "category": "Saúde", "language": "pt", "url": "https://querovidaesaude.com/" },
+
+  { "id": "apps-white-estate", "title": "Apps Oficiais (EGW Writings)", "category": "Apps", "language": "en", "url": "https://whiteestate.org/apps/" },
+
+  { "id": "adventech", "title": "Adventech (Sabbath School App / projetos)", "category": "Apps", "language": "en", "url": "https://adventech.io/" },
+
+  { "id": "7me", "title": "7me (gestão igreja e doações)", "category": "Apps", "language": "pt", "url": "https://7me.app/" },
+
+  { "id": "adventist-news", "title": "Adventist News Network (oficial)", "category": "Notícias", "language": "en", "url": "https://adventist.news/" },
+  { "id": "adventist-news-africa", "title": "Adventist News (Africa)", "category": "Notícias", "language": "en", "url": "https://adventist.news/africa" },
+
+  { "id": "hopechannel-watch", "title": "Hope Channel (watch)", "category": "Mídia", "language": "en", "url": "https://www.hopechannel.com/watch" },
+  { "id": "discover-hopechannel", "title": "Discover Hope Channel (cursos)", "category": "Cursos", "language": "en", "url": "https://discover.hopechannel.com/" },
+
+  { "id": "awr", "title": "Adventist World Radio (AWR)", "category": "Mídia", "language": "en", "url": "https://www.awr2.org/" },
+
+  { "id": "adventist-org", "title": "Site oficial Adventist.org", "category": "Institucional", "language": "en", "url": "https://adventist.org/" },
+
+  { "id": "adventistas-org-portal", "title": "Portal Adventistas.org (oficial)", "category": "Institucional", "language": "pt", "url": "https://adventistas.org/" }
+]
