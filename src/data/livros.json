@@ -1,0 +1,74 @@
+[
+  {
+    "id": "egw-grande-conflito",
+    "title": "O Grande Conflito",
+    "author": "Ellen G. White",
+    "type": "book",
+    "category": "EGW",
+    "language": "pt",
+    "url": "https://egwwritings.org/book/b1633"
+  },
+  {
+    "id": "egw-caminho-a-cristo",
+    "title": "Caminho a Cristo",
+    "author": "Ellen G. White",
+    "type": "book",
+    "category": "EGW",
+    "language": "pt",
+    "url": "https://egwwritings.org/book/b1637"
+  },
+  {
+    "id": "egw-desejado",
+    "title": "O Desejado de Todas as Nações",
+    "author": "Ellen G. White",
+    "type": "book",
+    "category": "EGW",
+    "language": "pt",
+    "url": "https://egwwritings.org/book/b1617"
+  },
+  {
+    "id": "egw-ciencia-bom-viver",
+    "title": "A Ciência do Bom Viver",
+    "author": "Ellen G. White",
+    "type": "book",
+    "category": "EGW",
+    "language": "pt",
+    "url": "https://egwwritings.org/book/b1621"
+  },
+  {
+    "id": "egw-eventos-finais",
+    "title": "Eventos Finais",
+    "author": "Ellen G. White",
+    "type": "book",
+    "category": "EGW",
+    "language": "pt",
+    "url": "https://egwwritings.org/book/b1604"
+  },
+  {
+    "id": "egw-mente-carater",
+    "title": "Mente, Caráter e Personalidade",
+    "author": "Ellen G. White",
+    "type": "book",
+    "category": "EGW",
+    "language": "pt",
+    "url": "https://egwwritings.org/book/b1624"
+  },
+  {
+    "id": "egw-educacao",
+    "title": "Educação",
+    "author": "Ellen G. White",
+    "type": "book",
+    "category": "EGW",
+    "language": "pt",
+    "url": "https://egwwritings.org/book/b1611"
+  },
+  {
+    "id": "beliefs-28-pdf",
+    "title": "28 Fundamental Beliefs (PDF)",
+    "author": "Seventh-day Adventist Church",
+    "type": "document",
+    "category": "Crenças",
+    "language": "en",
+    "url": "https://adventist.org/wp-content/uploads/2020/06/ADV-28Beliefs2020.pdf"
+  }
+]
