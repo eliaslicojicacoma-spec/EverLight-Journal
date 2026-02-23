@@ -31,11 +31,19 @@ export default function Header() {
                   href="/pt/library">
               Library
             </Link>
+
+            <Link className="rounded-xl px-3 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-100
+                             dark:text-white/80 dark:hover:bg-white/10"
+                  href="/pt/blog">
+              Blog
+            </Link>
+
             <Link className="rounded-xl px-3 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-100
                              dark:text-white/80 dark:hover:bg-white/10"
                   href="/pt/donate">
               Donate
             </Link>
+
             <ThemeToggle />
           </nav>
 
