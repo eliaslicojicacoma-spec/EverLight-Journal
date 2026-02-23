@@ -2,7 +2,7 @@ export type ConsentState = {
   necessary: true;
   analytics: boolean;
   ads: boolean;
-  updatedAt: string; // ISO
+  updatedAt: string;
 };
 
 const KEY = "everlight_consent_v1";
@@ -18,12 +18,12 @@ export function getConsent(): ConsentState | null {
   }
 }
 
-export function setConsent(consent: Omit<ConsentState, "necessary" | "updatedAt">) {
+export function setConsent(opts: { analytics: boolean; ads: boolean }) {
   if (typeof window === "undefined") return;
   const payload: ConsentState = {
     necessary: true,
-    analytics: consent.analytics,
-    ads: consent.ads,
+    analytics: opts.analytics,
+    ads: opts.ads,
     updatedAt: new Date().toISOString()
   };
   localStorage.setItem(KEY, JSON.stringify(payload));
