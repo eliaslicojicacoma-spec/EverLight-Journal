@@ -1,0 +1,89 @@
+[
+  {
+    "id": "pt-sociedade-etica-digital-2026",
+    "locale": "pt",
+    "slug": "etica-digital-verdade-ruido",
+    "title": "Ética Digital: entre a verdade e o ruído",
+    "excerpt": "Como navegar informação, desinformação e saúde mental num mundo sempre online — com princípios práticos e postura responsável.",
+    "category": "etica",
+    "tags": ["tecnologia", "cidadania", "saude-mental"],
+    "coverImage": "/images/blog/sociedade-etica-digital.jpg",
+    "ogImage": "/og/og-article.jpg",
+    "publishedAt": "2026-02-24",
+    "updatedAt": "2026-02-24",
+    "author": {
+      "name": "Elias Licoji Cacoma",
+      "image": "/images/autores/elias-licoji-cacoma.jpg"
+    },
+    "content": [
+      "A internet trouxe acesso, voz e oportunidades. Mas também trouxe ruído, manipulação e pressão social.",
+      "## O problema não é a tecnologia — é o uso",
+      "Quando a atenção vira produto, a tua mente vira mercado. E aí: a ética não é teoria, é sobrevivência.",
+      "## 3 práticas simples (e poderosas)",
+      "- Verifica a fonte antes de partilhar.",
+      "- Não discutas no calor — responde com calma (ou não responde).",
+      "- Faz higiene mental: horários offline e silêncio intencional.",
+      "## Um compromisso",
+      "Ser cidadão digital é escolher a verdade mesmo quando o algoritmo empurra o contrário."
+    ]
+  },
+  {
+    "id": "pt-adventista-ouvindo-voz-de-deus",
+    "locale": "pt",
+    "slug": "ouvindo-a-voz-de-deus-com-clareza",
+    "title": "Ouvindo a Voz de Deus com clareza",
+    "excerpt": "Como diferenciar impulso, emoção e direção espiritual com equilíbrio, Bíblia e disciplina diária.",
+    "category": "vida-espiritual",
+    "tags": ["oracao", "bible-study", "discipulado"],
+    "coverImage": "/images/blog/ouvindo-voz-de-deus.jpg",
+    "ogImage": "/og/og-article.jpg",
+    "publishedAt": "2026-02-24",
+    "updatedAt": "2026-02-24",
+    "author": {
+      "name": "Elias Licoji Cacoma",
+      "image": "/images/autores/elias-licoji-cacoma.jpg"
+    },
+    "content": [
+      "Nem toda ‘voz’ interna é direção divina. Algumas são ansiedade, outras são desejo, outras são medo.",
+      "## 4 filtros práticos",
+      "1) **Bíblia:** Deus não contradiz a Palavra.  
+2) **Caráter de Cristo:** a direção produz paz e coerência moral.  
+3) **Senso e responsabilidade:** fé não é irresponsabilidade.  
+4) **Tempo:** Deus não precisa de pressa para ser Deus.",
+      "## Uma rotina que funciona",
+      "- 10 min: leitura bíblica com anotação",
+      "- 5 min: oração (objetiva)",
+      "- 2 min: silêncio",
+      "## Resultado",
+      "Clareza não cai do céu como chuva — ela cresce como semente."
+    ]
+  },
+  {
+    "id": "en-society-leadership-character",
+    "locale": "en",
+    "slug": "leadership-character-consistency",
+    "title": "Leadership is character under pressure",
+    "excerpt": "Good leadership isn’t vibes. It’s consistency, clarity, and responsibility—especially when things get noisy.",
+    "category": "leadership",
+    "tags": ["leadership", "culture", "ethics"],
+    "coverImage": "/images/blog/leadership-character.jpg",
+    "ogImage": "/og/og-article.jpg",
+    "publishedAt": "2026-02-24",
+    "updatedAt": "2026-02-24",
+    "author": {
+      "name": "Elias Licoji Cacoma",
+      "image": "/images/autores/elias-licoji-cacoma.jpg"
+    },
+    "content": [
+      "Leadership is what remains when shortcuts stop working.",
+      "## Pressure reveals, it doesn’t create",
+      "You don’t become someone new under pressure—you become more clearly who you already are.",
+      "## 3 habits of credible leaders",
+      "- Tell the truth early.",
+      "- Keep promises small but consistent.",
+      "- Build systems, not heroic moments.",
+      "## Final thought",
+      "Respect is earned in slow daily decisions—then confirmed in crisis."
+    ]
+  }
+]
