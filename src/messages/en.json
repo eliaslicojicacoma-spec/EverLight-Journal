@@ -1,0 +1,15 @@
+{
+  "brand": "EverLight Journal",
+  "tagline": "Global society, grounded faith.",
+  "nav": {
+    "society": "Society",
+    "adventist": "Adventist",
+    "library": "Library",
+    "donate": "Support",
+    "about": "About",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "editorial": "Editorial Policy"
+  }
+}
