@@ -3,6 +3,7 @@ import Container from "./Container";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import MobileMenu from "@/components/layout/MobileMenu";
+import NavLink from "@/components/ui/NavLink";
 
 export default function Header() {
   return (
@@ -21,41 +22,12 @@ export default function Header() {
 
           {/* Desktop */}
           <nav className="hidden md:flex items-center gap-2">
-            <Link
-              className="rounded-xl px-3 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-100
-                         dark:text-white/80 dark:hover:bg-white/10"
-              href="/pt/society"
-            >
-              Society
-            </Link>
-            <Link
-              className="rounded-xl px-3 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-100
-                         dark:text-white/80 dark:hover:bg-white/10"
-              href="/pt/adventist"
-            >
-              Adventist
-            </Link>
-            <Link
-              className="rounded-xl px-3 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-100
-                         dark:text-white/80 dark:hover:bg-white/10"
-              href="/pt/library"
-            >
-              Library
-            </Link>
-            <Link
-              className="rounded-xl px-3 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-100
-                         dark:text-white/80 dark:hover:bg-white/10"
-              href="/pt/blog"
-            >
-              Blog
-            </Link>
-            <Link
-              className="rounded-xl px-3 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-100
-                         dark:text-white/80 dark:hover:bg-white/10"
-              href="/pt/donate"
-            >
-              Donate
-            </Link>
+            <NavLink href="/pt" label="Home" />
+            <NavLink href="/pt/society" label="Society" />
+            <NavLink href="/pt/adventist" label="Adventist" />
+            <NavLink href="/pt/library" label="Library" />
+            <NavLink href="/pt/blog" label="Blog" />
+            <NavLink href="/pt/donate" label="Donate" />
 
             <LanguageSwitcher />
             <ThemeToggle />
