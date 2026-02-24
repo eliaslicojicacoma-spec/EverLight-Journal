@@ -9,14 +9,17 @@ import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 type NavItem = { label: string; href: string };
 
 function buildNav(locale: "pt" | "en"): NavItem[] {
-  // Labels “internacionais” (curtos) — depois podemos traduzir via next-intl se quiseres
   return [
     { label: "Home", href: `/${locale}` },
     { label: "Society", href: `/${locale}/society` },
     { label: "Adventist", href: `/${locale}/adventist` },
     { label: "Library", href: `/${locale}/library` },
     { label: "Blog", href: `/${locale}/blog` },
+    { label: "Verse", href: `/${locale}/verse-of-day` },
+    { label: "Team", href: `/${locale}/team` },
     { label: "Donate", href: `/${locale}/donate` },
+    { label: "Transparency", href: `/${locale}/transparency` },
+    { label: "Share", href: `/${locale}/share` },
     { label: "About", href: `/${locale}/about` },
     { label: "Contact", href: `/${locale}/contact` }
   ];
@@ -29,7 +32,6 @@ export default function MobileMenu() {
   const nav = useMemo(() => buildNav(locale), [locale]);
   const [open, setOpen] = useState(false);
 
-  // fecha no ESC
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") setOpen(false);
@@ -38,7 +40,6 @@ export default function MobileMenu() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  // trava scroll ao abrir
   useEffect(() => {
     if (!open) return;
     const original = document.body.style.overflow;
@@ -64,7 +65,6 @@ export default function MobileMenu() {
 
       {open && (
         <div className="fixed inset-0 z-50">
-          {/* overlay */}
           <button
             className="absolute inset-0 bg-black/30"
             onClick={() => setOpen(false)}
@@ -72,7 +72,6 @@ export default function MobileMenu() {
             type="button"
           />
 
-          {/* drawer */}
           <div className="absolute right-0 top-0 h-full w-[86%] max-w-[380px] border-l
                           border-zinc-200 bg-white shadow-2xl
                           dark:border-white/10 dark:bg-zinc-950">
@@ -106,7 +105,7 @@ export default function MobileMenu() {
 
               <div className="grid gap-2">
                 {nav.map((item) => {
-                  const active = pathname === item.href;
+                  const active = pathname === item.href || pathname.startsWith(item.href + "/");
                   return (
                     <Link
                       key={item.href}
@@ -126,7 +125,7 @@ export default function MobileMenu() {
               <div className="rounded-2xl border p-4 text-xs text-zinc-600
                               border-zinc-200 bg-zinc-50
                               dark:border-white/10 dark:bg-white/5 dark:text-white/70">
-                Dica: PT/EN + SEO + consistência editorial = crescimento real.
+                Menu completo: rápido, limpo e pronto para crescer.
               </div>
             </div>
           </div>
@@ -134,4 +133,4 @@ export default function MobileMenu() {
       )}
     </>
   );
-            }
+      }
