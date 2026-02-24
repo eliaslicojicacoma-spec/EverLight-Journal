@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://everlightjournal.com/sitemap.xml
+Sitemap: https://ever-light-journal-m5bz.vercel.app/sitemap.xml
