@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true
+  async redirects() {
+    return [
+      // Root -> default locale
+      {
+        source: "/",
+        destination: "/pt",
+        permanent: false
+      }
+    ];
+  }
 };
 
 module.exports = nextConfig;
