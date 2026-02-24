@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { siteConfig } from "@/config/siteConfig";
 import teamRaw from "@/data/team.json";
 
@@ -71,13 +72,13 @@ export default async function TeamPage({
                        dark:border-white/10 dark:bg-white/5"
           >
             <div className="flex items-start gap-4">
-              <div className="h-14 w-14 overflow-hidden rounded-2xl border border-zinc-200 dark:border-white/10">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="relative h-14 w-14 overflow-hidden rounded-2xl border border-zinc-200 dark:border-white/10">
+                <Image
                   src={m.image || "/images/equipe/pioneiros.jpg"}
                   alt={m.name}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
+                  fill
+                  sizes="56px"
+                  className="object-cover"
                 />
               </div>
 
@@ -92,9 +93,7 @@ export default async function TeamPage({
 
                 {m.links?.email && (
                   <p className="mt-3 text-sm">
-                    <span className="font-extrabold">
-                      {locale === "pt" ? "Email:" : "Email:"}
-                    </span>{" "}
+                    <span className="font-extrabold">Email:</span>{" "}
                     <a
                       className="text-indigo-600 hover:underline dark:text-indigo-300"
                       href={`mailto:${m.links.email}`}
@@ -123,4 +122,4 @@ export default async function TeamPage({
       </div>
     </div>
   );
-        }
+}
