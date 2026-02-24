@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { siteConfig } from "@/config/siteConfig";
 import {
   formatDate,
@@ -82,7 +83,6 @@ export default async function ArticlePage({
   const canonicalUrl = `${base}/${locale}/blog/${post.slug}`;
   const ogImage = `${base}${post.ogImage || "/og/og-article.jpg"}`;
 
-  // Structured Data JSON-LD (Schema.org)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -91,31 +91,19 @@ export default async function ArticlePage({
     image: [ogImage],
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
-    author: [
-      {
-        "@type": "Person",
-        name: post.author.name
-      }
-    ],
+    author: [{ "@type": "Person", name: post.author.name }],
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
-      logo: {
-        "@type": "ImageObject",
-        url: `${base}/og/og-default.jpg`
-      }
+      logo: { "@type": "ImageObject", url: `${base}/og/og-default.jpg` }
     },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": canonicalUrl
-    }
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl }
   };
 
   const blocks = renderMarkdownLite(post.content);
 
   return (
     <article className="space-y-6">
-      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -150,20 +138,21 @@ export default async function ArticlePage({
           {post.title}
         </h1>
 
-        <p className="mt-3 text-zinc-600 dark:text-white/70">
-          {post.excerpt}
-        </p>
+        <p className="mt-3 text-zinc-600 dark:text-white/70">{post.excerpt}</p>
 
         <div className="mt-5 flex flex-wrap items-center gap-3 text-sm">
           <div className="flex items-center gap-2">
-            <div className="h-9 w-9 overflow-hidden rounded-full border border-zinc-200 dark:border-white/10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+            <div className="relative h-9 w-9 overflow-hidden rounded-full border border-zinc-200 dark:border-white/10">
+              <Image
                 src={post.author.image || "/images/autores/pioneiros.jpg"}
                 alt={post.author.name}
-                className="h-full w-full object-cover"
+                fill
+                sizes="36px"
+                className="object-cover"
+                priority={false}
               />
             </div>
+
             <div>
               <p className="font-extrabold">{post.author.name}</p>
               <p className="text-xs text-zinc-500 dark:text-white/50">
@@ -194,13 +183,16 @@ export default async function ArticlePage({
 
         {post.coverImage && (
           <div className="mt-6 overflow-hidden rounded-2xl border border-zinc-200 dark:border-white/10">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={post.coverImage}
-              alt={post.title}
-              className="h-[220px] w-full object-cover md:h-[320px]"
-              loading="lazy"
-            />
+            <div className="relative h-[220px] w-full md:h-[320px]">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 1024px"
+                className="object-cover"
+                priority={false}
+              />
+            </div>
           </div>
         )}
       </header>
@@ -286,4 +278,4 @@ export default async function ArticlePage({
       </footer>
     </article>
   );
-          }
+                }
