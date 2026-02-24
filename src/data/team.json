@@ -1,0 +1,20 @@
+[
+  {
+    "id": "elias",
+    "name": "Elias Licoji Cacoma",
+    "role": "Fundador / Editor",
+    "bio": "Visão editorial, curadoria, escrita e estratégia de crescimento do EverLight Journal.",
+    "image": "/images/equipe/elias.jpg",
+    "links": {
+      "email": "eliaslicojicacoma@gmail.com"
+    }
+  },
+  {
+    "id": "pioneiros",
+    "name": "Pioneiros (referência histórica)",
+    "role": "Inspiradores",
+    "bio": "Seção dedicada a resumos e referências históricas com respeito à fonte e ao contexto.",
+    "image": "/images/equipe/pioneiros.jpg",
+    "links": {}
+  }
+]
