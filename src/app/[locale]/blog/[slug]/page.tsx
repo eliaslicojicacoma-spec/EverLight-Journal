@@ -1,7 +1,12 @@
 import Link from "next/link";
-import { getPostBySlug, formatDate, renderMarkdownLite, stripMarkdown } from "@/lib/posts";
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/siteConfig";
+import {
+  formatDate,
+  getPostBySlug,
+  renderMarkdownLite,
+  stripMarkdown
+} from "@/lib/posts";
 
 export async function generateMetadata({
   params
@@ -73,10 +78,49 @@ export default async function ArticlePage({
     );
   }
 
+  const base = `https://${siteConfig.domain}`;
+  const canonicalUrl = `${base}/${locale}/blog/${post.slug}`;
+  const ogImage = `${base}${post.ogImage || "/og/og-article.jpg"}`;
+
+  // Structured Data JSON-LD (Schema.org)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    image: [ogImage],
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt || post.publishedAt,
+    author: [
+      {
+        "@type": "Person",
+        name: post.author.name
+      }
+    ],
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${base}/og/og-default.jpg`
+      }
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl
+    }
+  };
+
   const blocks = renderMarkdownLite(post.content);
 
   return (
     <article className="space-y-6">
+      {/* JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <div className="flex items-center justify-between gap-3">
         <Link
           href={`/${locale}/blog`}
@@ -113,7 +157,6 @@ export default async function ArticlePage({
         <div className="mt-5 flex flex-wrap items-center gap-3 text-sm">
           <div className="flex items-center gap-2">
             <div className="h-9 w-9 overflow-hidden rounded-full border border-zinc-200 dark:border-white/10">
-              {/* Se não tiver imagem real, o alt já resolve */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={post.author.image || "/images/autores/pioneiros.jpg"}
@@ -125,7 +168,12 @@ export default async function ArticlePage({
               <p className="font-extrabold">{post.author.name}</p>
               <p className="text-xs text-zinc-500 dark:text-white/50">
                 {formatDate(post.publishedAt, locale)}
-                {post.updatedAt ? ` • ${locale === "pt" ? "Atualizado" : "Updated"}: ${formatDate(post.updatedAt, locale)}` : ""}
+                {post.updatedAt
+                  ? ` • ${locale === "pt" ? "Atualizado" : "Updated"}: ${formatDate(
+                      post.updatedAt,
+                      locale
+                    )}`
+                  : ""}
               </p>
             </div>
           </div>
@@ -161,7 +209,6 @@ export default async function ArticlePage({
                           border-zinc-200 bg-white
                           dark:border-white/10 dark:bg-white/5">
         <div className="prose max-w-none prose-zinc dark:prose-invert">
-          {/* Render markdown-lite */}
           {(() => {
             const elements: React.ReactNode[] = [];
             let listBuffer: string[] = [];
@@ -190,15 +237,17 @@ export default async function ArticlePage({
                 return;
               }
 
-              // paragraphs keep line breaks
-              const text = b.text.split("\n").map((line, i) => (
-                <span key={`p-${idx}-${i}`}>
-                  {line}
-                  {i < b.text.split("\n").length - 1 ? <br /> : null}
-                </span>
-              ));
-
-              elements.push(<p key={`p-${idx}`}>{text}</p>);
+              const lines = b.text.split("\n");
+              elements.push(
+                <p key={`p-${idx}`}>
+                  {lines.map((line, i) => (
+                    <span key={`p-${idx}-${i}`}>
+                      {line}
+                      {i < lines.length - 1 ? <br /> : null}
+                    </span>
+                  ))}
+                </p>
+              );
             });
 
             flushList("end");
