@@ -9,15 +9,37 @@ export default function Footer() {
           <p className="text-sm text-zinc-600 dark:text-white/70">
             © {new Date().getFullYear()} EverLight Journal
           </p>
+
           <div className="flex flex-wrap gap-4 text-sm">
-            <Link className="text-zinc-700 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white" href="/pt/privacy">
+            <Link
+              className="text-zinc-700 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white"
+              href="/pt/privacy"
+            >
               Privacy
             </Link>
-            <Link className="text-zinc-700 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white" href="/pt/terms">
+            <Link
+              className="text-zinc-700 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white"
+              href="/pt/terms"
+            >
               Terms
             </Link>
-            <Link className="text-zinc-700 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white" href="/pt/editorial-policy">
+            <Link
+              className="text-zinc-700 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white"
+              href="/pt/editorial-policy"
+            >
               Editorial
+            </Link>
+            <Link
+              className="text-zinc-700 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white"
+              href="/pt/transparency"
+            >
+              Transparency
+            </Link>
+            <Link
+              className="text-zinc-700 hover:text-zinc-900 dark:text-white/70 dark:hover:text-white"
+              href="/pt/share"
+            >
+              Share
             </Link>
           </div>
         </div>
