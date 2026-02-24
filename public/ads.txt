@@ -1,0 +1,6 @@
+# EverLight Journal - ads.txt
+# IMPORTANT:
+# After AdSense approval, Google will provide the exact line(s) to paste here.
+# Replace the placeholder below with the real "google.com, pub-XXXX, DIRECT, f08c47fec0942fa0"
+
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
