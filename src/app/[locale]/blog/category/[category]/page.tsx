@@ -1,6 +1,35 @@
 import Link from "next/link";
 import BlogSearchGrid from "@/components/blog/BlogSearchGrid";
 import { getPostsByCategory, getAllCategories } from "@/lib/posts";
+import type { Metadata } from "next";
+import { siteConfig } from "@/config/siteConfig";
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ locale: "pt" | "en"; category: string }>;
+}): Promise<Metadata> {
+  const { locale, category } = await params;
+
+  const base = `https://${siteConfig.domain}`;
+  const url = `${base}/${locale}/blog/category/${category}`;
+
+  const title = locale === "pt" ? `Categoria: ${category}` : `Category: ${category}`;
+  const description =
+    locale === "pt"
+      ? `Artigos do EverLight Journal na categoria "${category}".`
+      : `EverLight Journal posts in "${category}".`;
+
+  const image = `${base}/og/og-article.jpg`;
+
+  return {
+    title: `${title} • ${siteConfig.name}`,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title, description, url, images: [{ url: image }] },
+    twitter: { card: "summary_large_image", title, description, images: [image] }
+  };
+}
 
 export default async function CategoryPage({
   params
@@ -21,7 +50,7 @@ export default async function CategoryPage({
           <div>
             <Link
               href={`/${locale}/blog`}
-              className="text-sm font-bold text-indigo-600 hover:underline dark:text-indigo-300"
+              className="text-sm font-extrabold text-indigo-600 hover:underline dark:text-indigo-300"
             >
               ← {locale === "pt" ? "Voltar ao Blog" : "Back to Blog"}
             </Link>
@@ -39,7 +68,7 @@ export default async function CategoryPage({
             <div className="rounded-2xl border p-4
                             border-zinc-200 bg-zinc-50
                             dark:border-white/10 dark:bg-white/5">
-              <p className="text-sm font-bold">
+              <p className="text-sm font-extrabold">
                 {locale === "pt" ? "Outras categorias" : "Other categories"}
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
@@ -47,7 +76,7 @@ export default async function CategoryPage({
                   <Link
                     key={c.slug}
                     href={`/${locale}/blog/category/${c.slug}`}
-                    className={`rounded-full border px-3 py-1 text-xs font-bold
+                    className={`rounded-full border px-3 py-1 text-xs font-extrabold
                       border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50
                       dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:hover:bg-white/10
                       ${c.slug === category ? "ring-2 ring-indigo-500/30" : ""}`}
