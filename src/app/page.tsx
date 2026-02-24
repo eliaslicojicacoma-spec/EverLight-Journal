@@ -3,14 +3,12 @@ import Link from "next/link";
 export default function RootGatewayPage() {
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100">
-      {/* Background glow */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-white/5 blur-3xl" />
         <div className="absolute bottom-[-180px] right-[-120px] h-[420px] w-[420px] rounded-full bg-white/5 blur-3xl" />
       </div>
 
       <div className="relative mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center px-5 py-10">
-        {/* Header */}
         <div className="flex w-full items-center justify-center">
           <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm">
             <span className="h-2 w-2 rounded-full bg-emerald-400" />
@@ -20,7 +18,6 @@ export default function RootGatewayPage() {
           </div>
         </div>
 
-        {/* Hero */}
         <div className="mt-8 w-full text-center">
           <h1 className="text-balance text-4xl font-semibold tracking-tight md:text-5xl">
             Escolha o idioma para continuar
@@ -32,7 +29,6 @@ export default function RootGatewayPage() {
           </p>
         </div>
 
-        {/* Cards */}
         <div className="mt-10 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
           <Link
             href="/pt"
@@ -83,19 +79,17 @@ export default function RootGatewayPage() {
           </Link>
         </div>
 
-        {/* Auto redirect hint */}
         <div className="mt-8 w-full rounded-2xl border border-white/10 bg-white/5 p-5">
           <p className="text-sm text-zinc-300">
-            Dica: se tu preferes ir direto para PT sempre, eu posso configurar um
-            botão “Lembrar idioma” (salva no browser) e redireciona automático.
+            Dica: depois eu posso adicionar “Lembrar idioma” para redirecionar
+            automaticamente (sem te perguntar toda vez).
           </p>
         </div>
 
-        {/* Footer */}
         <footer className="mt-10 text-center text-xs text-zinc-500">
           © {new Date().getFullYear()} EverLight Journal • Built with Next.js + Tailwind
         </footer>
       </div>
     </main>
   );
-      }
+}
