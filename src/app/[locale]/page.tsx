@@ -1,5 +1,4 @@
 // src/app/[locale]/page.tsx
-import Image from "next/image";
 import Link from "next/link";
 
 type PageProps = {
@@ -8,7 +7,6 @@ type PageProps = {
 
 export default function HomePage({ params }: PageProps) {
   const locale = params?.locale ?? "pt";
-
   const isPT = locale === "pt";
 
   const title = "EverLight Journal";
@@ -23,27 +21,24 @@ export default function HomePage({ params }: PageProps) {
     <main className="min-h-screen bg-black text-white">
       {/* HERO */}
       <section className="relative min-h-[78vh] overflow-hidden">
-        {/* Background image */}
-        <Image
-          src="/images/hero/hero.jpg"
-          alt="Hero background"
-          fill
-          priority
-          className="object-cover object-center"
-        />
+        {/* Background (no image needed) */}
+        <div className="absolute inset-0 bg-black" />
 
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/60" />
+        {/* Premium gradient layers */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/60 to-black" />
+        <div className="absolute inset-0 bg-[radial-gradient(900px_circle_at_20%_20%,rgba(16,185,129,0.25),transparent_55%),radial-gradient(900px_circle_at_80%_30%,rgba(59,130,246,0.22),transparent_55%),radial-gradient(900px_circle_at_50%_90%,rgba(168,85,247,0.18),transparent_60%)]" />
 
-        {/* Soft gradient overlay (gives the “premium” vibe) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/90" />
+        {/* Soft noise (gives texture) */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-soft-light [background-image:radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:18px_18px]" />
 
         {/* Content */}
         <div className="relative mx-auto flex min-h-[78vh] max-w-6xl items-center px-5 py-16">
           <div className="w-full max-w-3xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs text-white/80 backdrop-blur">
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              {isPT ? "PT/EN • Revista Digital • SEO-ready" : "PT/EN • Digital Magazine • SEO-ready"}
+              {isPT
+                ? "PT/EN • Revista Digital • SEO-ready"
+                : "PT/EN • Digital Magazine • SEO-ready"}
             </div>
 
             <h1 className="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
@@ -75,11 +70,18 @@ export default function HomePage({ params }: PageProps) {
               >
                 {isPT ? "Ir para Biblioteca" : "Go to Library"}
               </Link>
+
+              <Link
+                href={`/${locale}/blog`}
+                className="rounded-2xl border border-white/15 bg-black/10 px-5 py-3 text-sm font-semibold text-white/90 backdrop-blur transition hover:bg-white/10"
+              >
+                {isPT ? "Ver Blog" : "See Blog"}
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* Bottom “waves / glow” effect */}
+        {/* Bottom glow blobs */}
         <div className="pointer-events-none absolute -bottom-24 left-1/2 h-72 w-[900px] -translate-x-1/2 rounded-full bg-gradient-to-r from-indigo-500/30 via-cyan-400/20 to-emerald-400/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 left-1/2 h-72 w-[1100px] -translate-x-1/2 rounded-full bg-gradient-to-r from-blue-500/20 via-purple-500/15 to-pink-500/15 blur-3xl" />
       </section>
@@ -126,4 +128,4 @@ export default function HomePage({ params }: PageProps) {
       </section>
     </main>
   );
-              }
+}
