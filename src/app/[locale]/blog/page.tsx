@@ -1,119 +1,77 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getAllPosts } from "@/lib/blog";
 
 export default function BlogPage({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+  const locale = params?.locale ?? "pt";
   const isPT = locale === "pt";
 
-  const t = {
-    kicker: isPT ? "ARTIGOS & REFLEXÕES" : "ARTICLES & REFLECTIONS",
-    title: isPT ? "Blog" : "Blog",
-    desc: isPT
-      ? "Artigos com estrutura (resumo → contexto → aplicação), fontes no fim e leitura perfeita no telemóvel."
-      : "Articles with structure (summary → context → application), sources at the end, and mobile-friendly reading.",
-    cta1: isPT ? "Explorar Society" : "Explore Society",
-    cta2: isPT ? "Abrir Adventista →" : "Open Adventist →",
-    latest: isPT ? "Em destaque" : "Featured",
-  };
-
-  const featured = [
-    {
-      title: isPT ? "Fé com inteligência: como filtrar ruído" : "Faith with clarity: filtering noise",
-      excerpt: isPT
-        ? "A internet amplifica tudo. Aqui vai um método simples pra não cair em manipulação."
-        : "The internet amplifies everything. Here’s a simple method to avoid manipulation.",
-      href: `/${locale}/society`,
-      img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=70",
-      tag: isPT ? "SOCIEDADE" : "SOCIETY",
-    },
-    {
-      title: isPT ? "Como estudar a Bíblia sem se perder" : "How to study the Bible without getting lost",
-      excerpt: isPT
-        ? "Contexto, comparação e aplicação — em passos curtos e práticos."
-        : "Context, comparison, and application — in short, practical steps.",
-      href: `/${locale}/adventist`,
-      img: "https://images.unsplash.com/photo-1548625361-58a9b86aa83b?auto=format&fit=crop&w=1600&q=70",
-      tag: isPT ? "ADVENTISTA" : "ADVENTIST",
-    },
-  ];
+  const posts = getAllPosts(locale);
 
   return (
-    <div className="space-y-10">
-      <section className="relative overflow-hidden rounded-[28px] border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
-        <div className="absolute inset-0">
+    <main className="space-y-8">
+      <section className="relative overflow-hidden rounded-[28px] border border-black/10 bg-white p-8">
+        <div className="absolute inset-0 opacity-[0.35]">
           <Image
-            src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2200&q=70"
-            alt="Blog"
+            src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=2200&q=70"
+            alt="Blog hero"
             fill
-            priority
-            className="object-cover opacity-70 dark:opacity-55"
+            className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/65 to-white/95 dark:from-zinc-950/40 dark:via-zinc-950/70 dark:to-zinc-950/95" />
         </div>
-
-        <div className="relative p-6 sm:p-10">
-          <div className="text-[11px] font-medium tracking-[0.22em] text-zinc-600 dark:text-zinc-300">
-            {t.kicker}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/75 to-white" />
+        <div className="relative">
+          <div className="text-[11px] tracking-[0.22em] text-black/60">
+            {isPT ? "ARTIGOS • CLAREZA • APLICAÇÃO" : "ARTICLES • CLARITY • ACTION"}
           </div>
-
-          <div className="mt-4 flex items-center gap-3">
-            <div className="h-[1px] w-10 bg-zinc-900/25 dark:bg-white/20" />
-            <div className="text-xs font-semibold tracking-[0.22em] text-zinc-900 dark:text-white">
-              EverLight Journal
-            </div>
-          </div>
-
-          <h1 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">{t.title}</h1>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
-            {t.desc}
+          <h1 className="mt-4 text-4xl font-semibold tracking-tight">
+            {isPT ? "Blog" : "Blog"}
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-black/65">
+            {isPT
+              ? "Conteúdo original com contexto, resumo e passos práticos. Sem copiar artigos. Sem sensacionalismo."
+              : "Original content with context, summaries, and practical steps. No copy-paste. No sensationalism."}
           </p>
-
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href={`/${locale}/society`}
-              className="inline-flex items-center justify-center rounded-xl bg-zinc-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-100"
-            >
-              {t.cta1}
-            </Link>
-            <Link
-              href={`/${locale}/adventist`}
-              className="inline-flex items-center justify-center rounded-xl border border-zinc-200 bg-white/80 px-4 py-2 text-sm font-semibold text-zinc-900 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950/30 dark:text-white dark:hover:bg-zinc-900/40"
-            >
-              {t.cta2}
-            </Link>
-          </div>
         </div>
       </section>
 
-      <section className="rounded-[28px] border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
-        <h2 className="text-lg font-semibold">{t.latest}</h2>
+      <section className="grid gap-6 md:grid-cols-2">
+        {posts.map((p) => (
+          <Link
+            key={p.id}
+            href={`/${locale}/blog/${p.slug}`}
+            className="group overflow-hidden rounded-[26px] border border-black/10 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <div className="relative aspect-[16/10] w-full bg-black/5">
+              <Image src={p.coverImage} alt={p.title} fill className="object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/10 to-transparent" />
+              <div className="absolute left-5 top-5 rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-black backdrop-blur">
+                {p.category.toUpperCase()}
+              </div>
+            </div>
 
-        <div className="mt-5 grid gap-4 md:grid-cols-2">
-          {featured.map((a) => (
-            <Link
-              key={a.title}
-              href={a.href}
-              className="group overflow-hidden rounded-[24px] border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950"
-            >
-              <div className="relative h-44">
-                <Image src={a.img} alt={a.title} fill className="object-cover opacity-90 group-hover:opacity-100" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/85 via-white/25 to-transparent dark:from-zinc-950/85 dark:via-zinc-950/20" />
-                <div className="absolute left-4 top-4 rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-zinc-800 backdrop-blur dark:bg-zinc-950/50 dark:text-zinc-200">
-                  {a.tag}
-                </div>
+            <div className="p-6">
+              <h2 className="text-2xl font-semibold leading-tight">{p.title}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-black/65">{p.excerpt}</p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {p.tags?.slice(0, 3).map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-black/10 bg-black/5 px-3 py-1 text-[11px] font-semibold text-black/70"
+                  >
+                    #{t}
+                  </span>
+                ))}
               </div>
 
-              <div className="p-5">
-                <h3 className="text-base font-semibold">{a.title}</h3>
-                <p className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">{a.excerpt}</p>
-                <div className="mt-4 text-xs font-semibold tracking-wide text-zinc-900 underline decoration-zinc-900/25 underline-offset-4 dark:text-white dark:decoration-white/25">
-                  {isPT ? "LER →" : "READ →"}
-                </div>
+              <div className="mt-6 text-xs font-semibold tracking-wide text-black underline decoration-black/20 underline-offset-4">
+                {isPT ? "LER ARTIGO →" : "READ →"}
               </div>
-            </Link>
-          ))}
-        </div>
+            </div>
+          </Link>
+        ))}
       </section>
-    </div>
+    </main>
   );
-            }
+}
