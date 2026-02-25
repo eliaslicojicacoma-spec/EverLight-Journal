@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import SubscribeForm from "@/components/subscribe/SubscribeForm";
 
 export default function SubscribePage({ params }: { params: { locale: string } }) {
   const { locale } = params;
   const isPT = locale === "pt";
 
   const t = {
-    kicker: isPT ? "NEWSLETTER" : "NEWSLETTER",
+    kicker: "NEWSLETTER",
     title: isPT ? "Inscrever-se" : "Subscribe",
     desc: isPT
       ? "Recebe devocionais, reflexões e artigos úteis. Sem spam. Sem drama. Só valor."
@@ -15,17 +16,10 @@ export default function SubscribePage({ params }: { params: { locale: string } }
     perks: isPT
       ? ["Versículo do dia (curto)", "1 artigo forte por semana", "Recursos da Biblioteca", "Atualizações do projeto"]
       : ["Daily verse (short)", "1 strong article per week", "Library resources", "Project updates"],
-    formTitle: isPT ? "Entrar na lista" : "Join the list",
-    email: isPT ? "Teu email" : "Your email",
-    name: isPT ? "Teu nome (opcional)" : "Your name (optional)",
-    btn: isPT ? "Inscrever agora" : "Subscribe now",
-    privacy: isPT
-      ? "Respeitamos tua privacidade. Tu podes cancelar quando quiseres."
-      : "We respect your privacy. You can unsubscribe anytime.",
     back: isPT ? "Voltar ao Blog" : "Back to Blog",
     note: isPT
-      ? "Nota: este formulário é UI pronto. Depois ligamos com Mailchimp/Resend/ConvertKit."
-      : "Note: this is UI-ready. Later we connect Mailchimp/Resend/ConvertKit.",
+      ? "Dica: no início, melhor enviar pouco e sempre (consistência > volume)."
+      : "Tip: at the start, send less but consistently (consistency > volume).",
   };
 
   return (
@@ -95,44 +89,9 @@ export default function SubscribePage({ params }: { params: { locale: string } }
         </div>
 
         <div className="lg:col-span-7">
-          <div className="rounded-[28px] border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
-            <h2 className="text-lg font-semibold">{t.formTitle}</h2>
-
-            <form className="mt-4 grid gap-4">
-              <div className="grid gap-2">
-                <label className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
-                  {t.email}
-                </label>
-                <input
-                  type="email"
-                  placeholder="name@email.com"
-                  className="h-11 rounded-xl border border-zinc-200 bg-white px-4 text-sm outline-none ring-0 transition focus:border-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:focus:border-white"
-                />
-              </div>
-
-              <div className="grid gap-2">
-                <label className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
-                  {t.name}
-                </label>
-                <input
-                  type="text"
-                  placeholder={isPT ? "Elias (opcional)" : "Elias (optional)"}
-                  className="h-11 rounded-xl border border-zinc-200 bg-white px-4 text-sm outline-none ring-0 transition focus:border-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:focus:border-white"
-                />
-              </div>
-
-              <button
-                type="button"
-                className="inline-flex h-11 items-center justify-center rounded-xl bg-zinc-900 px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-100"
-              >
-                {t.btn}
-              </button>
-
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">{t.privacy}</p>
-            </form>
-          </div>
+          <SubscribeForm locale={locale} />
         </div>
       </section>
     </div>
   );
-          }
+}
