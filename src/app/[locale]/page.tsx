@@ -22,19 +22,24 @@ export default function HomePage({ params }: PageProps) {
     cta2: isPT ? "Versículo do Dia →" : "Verse of the Day →",
 
     f1t: isPT ? "Fortalecer a Fé" : "Strengthen Faith",
-    f1d: isPT ? "Conteúdos bíblicos profundos que edificam e transformam vidas." : "Deep biblical content that builds and transforms lives.",
+    f1d: isPT
+      ? "Conteúdos bíblicos profundos que edificam e transformam vidas."
+      : "Deep biblical content that builds and transforms lives.",
     f2t: isPT ? "Promover Valores" : "Promote Values",
-    f2d: isPT ? "Princípios cristãos aplicados aos desafios atuais da sociedade." : "Christian principles applied to modern challenges.",
+    f2d: isPT
+      ? "Princípios cristãos aplicados aos desafios atuais da sociedade."
+      : "Christian principles applied to modern challenges.",
     f3t: isPT ? "Alcance Global" : "Global Reach",
-    f3d: isPT ? "Impacto com mensagem universal em diferentes lugares do mundo." : "Impact with a universal message across the world.",
+    f3d: isPT
+      ? "Impacto com mensagem universal em diferentes lugares do mundo."
+      : "Impact with a universal message across the world.",
 
     verseK: isPT ? "INSPIRAÇÃO DIÁRIA" : "DAILY INSPIRATION",
     verseTitle: isPT ? "A Palavra Viva" : "The Living Word",
     verseBtn: isPT ? "Ler Reflexão" : "Read Reflection",
-    verseText:
-      isPT
-        ? "“Porque Deus amou o mundo de tal maneira que deu o Seu Filho unigênito, para que todo aquele que Nele crê não pereça, mas tenha a vida eterna.”"
-        : "“For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life.”",
+    verseText: isPT
+      ? "“Porque Deus amou o mundo de tal maneira que deu o Seu Filho unigênito, para que todo aquele que Nele crê não pereça, mas tenha a vida eterna.”"
+      : "“For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life.”",
     verseRef: "— João 3:16",
 
     sectionArticles: isPT ? "Diálogos de Fé" : "Faith Dialogues",
@@ -107,8 +112,14 @@ export default function HomePage({ params }: PageProps) {
 
           <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-center px-5">
             <div className="max-w-2xl">
-              <div className="text-[11px] tracking-[0.22em] text-[#6B6B6B]">
-                {t.heroKicker}
+              <div className="text-[11px] tracking-[0.22em] text-[#6B6B6B]">{t.heroKicker}</div>
+
+              {/* Brand no herói (premium, sem poluir) */}
+              <div className="mt-4 flex items-center gap-3">
+                <div className="h-[1px] w-10 bg-[#121212]/25" />
+                <div className="text-xs font-semibold tracking-[0.22em] text-[#2A2A2A]">
+                  {t.brand}
+                </div>
               </div>
 
               <h1 className="mt-5 text-5xl font-semibold leading-[0.95] tracking-tight sm:text-6xl">
@@ -116,9 +127,7 @@ export default function HomePage({ params }: PageProps) {
                 <span className="font-light italic text-[#2A2A2A]">{t.heroTitle2}</span>
               </h1>
 
-              <p className="mt-5 text-[15px] leading-relaxed text-[#555] sm:text-base">
-                {t.heroDesc}
-              </p>
+              <p className="mt-5 text-[15px] leading-relaxed text-[#555] sm:text-base">{t.heroDesc}</p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
@@ -166,9 +175,7 @@ export default function HomePage({ params }: PageProps) {
             </div>
 
             <div className="mx-auto mt-10 max-w-3xl border border-white/15 bg-white/5 p-7 sm:p-10">
-              <p className="text-lg font-medium leading-relaxed text-white/90 sm:text-xl">
-                {t.verseText}
-              </p>
+              <p className="text-lg font-medium leading-relaxed text-white/90 sm:text-xl">{t.verseText}</p>
               <p className="mt-4 text-sm text-white/70">{t.verseRef}</p>
             </div>
           </div>
@@ -227,7 +234,12 @@ export default function HomePage({ params }: PageProps) {
               <Link key={b.title} href={b.href} className="group text-center">
                 <div className="mx-auto w-full max-w-[420px] overflow-hidden bg-[#E9E6DF]">
                   <div className="relative aspect-[3/4] w-full">
-                    <Image src={b.img} alt={b.title} fill className="object-cover transition group-hover:scale-[1.02]" />
+                    <Image
+                      src={b.img}
+                      alt={b.title}
+                      fill
+                      className="object-cover transition group-hover:scale-[1.02]"
+                    />
                   </div>
                 </div>
 
@@ -267,59 +279,8 @@ export default function HomePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* FOOTER (forte) */}
-      <footer className="bg-[#1F1F1F] text-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-2">
-          <div>
-            <div className="text-lg font-semibold">{t.brand}</div>
-            <p className="mt-3 max-w-md text-sm text-white/70">
-              {isPT
-                ? "Conectando fé e sociedade de forma equilibrada, bíblica e relevante para os desafios atuais."
-                : "Connecting faith and society in a balanced, biblical, and relevant way for today’s challenges."}
-            </p>
-
-            <div className="mt-6 space-y-2 text-sm text-white/70">
-              <div>📞 +244 933 522 616</div>
-              <div>✉️ eliaslicojicacoma@gmail.com</div>
-            </div>
-          </div>
-
-          <div className="grid gap-10 sm:grid-cols-2">
-            <div>
-              <div className="text-sm font-semibold">Links Rápidos</div>
-              <ul className="mt-4 space-y-2 text-sm text-white/70">
-                <li><Link className="hover:text-white" href={`/${locale}/blog`}>Blog</Link></li>
-                <li><Link className="hover:text-white" href={`/${locale}/society`}>Sociedade</Link></li>
-                <li><Link className="hover:text-white" href={`/${locale}/library`}>Livros</Link></li>
-                <li><Link className="hover:text-white" href={`/${locale}/about`}>Sobre</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <div className="text-sm font-semibold">Recursos</div>
-              <ul className="mt-4 space-y-2 text-sm text-white/70">
-                <li><Link className="hover:text-white" href={`/${locale}/donate`}>Apoie</Link></li>
-                <li><Link className="hover:text-white" href={`/${locale}/subscribe`}>Newsletter</Link></li>
-                <li><Link className="hover:text-white" href={`/${locale}/contact`}>Contato</Link></li>
-                <li><Link className="hover:text-white" href={`/${locale}/privacy`}>Privacidade</Link></li>
-              </ul>
-
-              <div className="mt-6">
-                <Link
-                  href={`/${locale}/subscribe`}
-                  className="inline-block w-full border border-white/25 px-6 py-3 text-center text-xs font-semibold tracking-wide text-white transition hover:bg-white/10"
-                >
-                  Inscrever-se
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-white/10 py-6 text-center text-xs text-white/55">
-          © {new Date().getFullYear()} {t.brand}. {isPT ? "Todos os direitos reservados." : "All rights reserved."}
-        </div>
-      </footer>
+      {/* ⚠️ Footer removido daqui para evitar duplicação.
+          O footer deve ficar APENAS no <Footer /> global do layout. */}
     </main>
   );
 }
@@ -334,4 +295,4 @@ function Feature({ icon, title, desc }: { icon: string; title: string; desc: str
       <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-[#6B6B6B]">{desc}</p>
     </div>
   );
-                }
+}
