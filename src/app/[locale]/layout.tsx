@@ -1,8 +1,11 @@
-import "@/app/globals.css";
-import ThemeInitScript from "@/components/legal/ThemeInitScript";
-import CookieBanner from "@/components/legal/CookieBanner";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import type { Metadata } from "next";
+import "../globals.css";
+import Header from "@/components/header";
+
+export const metadata: Metadata = {
+  title: "EverLight Journal",
+  description: "Fé & Sociedade — conteúdo original, moderno e confiável.",
+};
 
 export default function LocaleLayout({
   children,
@@ -11,38 +14,77 @@ export default function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const { locale } = params;
+  const locale = params?.locale ?? "pt";
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <head>
-        <ThemeInitScript />
-      </head>
-
-      <body className="min-h-screen bg-white text-zinc-900 antialiased dark:bg-zinc-950 dark:text-white">
-        {/* Premium background: soft glows + blocks */}
-        <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-          <div className="absolute -top-36 left-1/2 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-zinc-200/60 blur-3xl dark:bg-zinc-800/50" />
-          <div className="absolute -bottom-44 -left-44 h-[560px] w-[560px] rounded-full bg-amber-200/40 blur-3xl dark:bg-amber-500/10" />
-          <div className="absolute -bottom-60 -right-60 h-[640px] w-[640px] rounded-full bg-sky-200/40 blur-3xl dark:bg-sky-500/10" />
-
-          <div className="absolute left-6 top-24 h-24 w-24 rounded-3xl bg-zinc-100/80 ring-1 ring-zinc-200/70 dark:bg-zinc-900/40 dark:ring-zinc-800/60" />
-          <div className="absolute right-10 top-40 h-28 w-28 rounded-3xl bg-zinc-100/70 ring-1 ring-zinc-200/70 dark:bg-zinc-900/40 dark:ring-zinc-800/60" />
-          <div className="absolute bottom-24 left-10 h-20 w-20 rounded-3xl bg-zinc-100/70 ring-1 ring-zinc-200/70 dark:bg-zinc-900/40 dark:ring-zinc-800/60" />
+      <body className="min-h-screen">
+        {/* Premium background */}
+        <div className="fixed inset-0 -z-10">
+          <div className="absolute inset-0 bg-[#F6F4EF]" />
+          <div className="absolute -top-40 left-1/2 h-[520px] w-[980px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(26,42,120,0.12),transparent_65%)] blur-2xl" />
+          <div className="absolute -bottom-64 left-1/2 h-[520px] w-[980px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(216,199,140,0.18),transparent_65%)] blur-2xl" />
         </div>
 
-        <Header />
+        <Header locale={locale} />
 
-        <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
-          <div className="rounded-[28px] border border-zinc-200/70 bg-white/70 shadow-sm backdrop-blur dark:border-zinc-800/60 dark:bg-zinc-950/50">
-            <div className="p-4 sm:p-6 lg:p-8">{children}</div>
+        <div className="mx-auto max-w-6xl px-4 pb-20 pt-6 sm:px-5">
+          {children}
+        </div>
+
+        <footer className="border-t border-black/10 bg-[#1F1F1F] text-white">
+          <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-2">
+            <div>
+              <div className="text-lg font-semibold">EverLight Journal</div>
+              <p className="mt-3 max-w-md text-sm text-white/70">
+                {locale === "pt"
+                  ? "Conectando fé e sociedade de forma equilibrada, bíblica e relevante para os desafios atuais."
+                  : "Connecting faith and society in a balanced, biblical, and relevant way for today’s challenges."}
+              </p>
+
+              <div className="mt-6 space-y-2 text-sm text-white/70">
+                <div>📞 +244 933 522 616</div>
+                <div>✉️ eliaslicojicacoma@gmail.com</div>
+              </div>
+            </div>
+
+            <div className="grid gap-10 sm:grid-cols-2">
+              <div>
+                <div className="text-sm font-semibold">Links</div>
+                <ul className="mt-4 space-y-2 text-sm text-white/70">
+                  <li><a className="hover:text-white" href={`/${locale}/blog`}>Blog</a></li>
+                  <li><a className="hover:text-white" href={`/${locale}/society`}>{locale === "pt" ? "Sociedade" : "Society"}</a></li>
+                  <li><a className="hover:text-white" href={`/${locale}/adventist`}>{locale === "pt" ? "Adventista" : "Adventist"}</a></li>
+                  <li><a className="hover:text-white" href={`/${locale}/library`}>{locale === "pt" ? "Biblioteca" : "Library"}</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <div className="text-sm font-semibold">Recursos</div>
+                <ul className="mt-4 space-y-2 text-sm text-white/70">
+                  <li><a className="hover:text-white" href={`/${locale}/verse-of-day`}>{locale === "pt" ? "Versículo do Dia" : "Verse of the Day"}</a></li>
+                  <li><a className="hover:text-white" href={`/${locale}/donate`}>{locale === "pt" ? "Doar" : "Donate"}</a></li>
+                  <li><a className="hover:text-white" href={`/${locale}/contact`}>{locale === "pt" ? "Contato" : "Contact"}</a></li>
+                  <li><a className="hover:text-white" href={`/${locale}/privacy`}>{locale === "pt" ? "Privacidade" : "Privacy"}</a></li>
+                </ul>
+
+                <div className="mt-6">
+                  <a
+                    href={`/${locale}/donate`}
+                    className="inline-block w-full rounded-xl border border-white/25 px-6 py-3 text-center text-xs font-semibold tracking-wide text-white transition hover:bg-white/10"
+                  >
+                    {locale === "pt" ? "Apoiar o Ministério" : "Support the Ministry"}
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-        </main>
 
-        {/* ✅ Passa locale ao Footer */}
-        <Footer params={{ locale }} />
-
-        <CookieBanner />
+          <div className="border-t border-white/10 py-6 text-center text-xs text-white/55">
+            © {new Date().getFullYear()} EverLight Journal.{" "}
+            {locale === "pt" ? "Todos os direitos reservados." : "All rights reserved."}
+          </div>
+        </footer>
       </body>
     </html>
   );
