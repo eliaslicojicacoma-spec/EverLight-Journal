@@ -3,23 +3,17 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
+:root{
+  --bg: #F6F4EF;
+  --fg: #121212;
+  --muted: #6b6b6b;
+  --card: rgba(255,255,255,0.72);
+  --stroke: rgba(18,18,18,0.12);
+  --brand: #1A2A78;
+  --gold: #D8C78C;
 }
 
-html,
-body {
-  height: 100%;
-}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); }
 
-body {
-  margin: 0;
-  background: #000;
-  color: #fff;
-}
-
-/* Optional: nicer text rendering */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+::selection { background: rgba(216,199,140,0.55); }
