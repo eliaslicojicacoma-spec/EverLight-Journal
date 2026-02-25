@@ -39,7 +39,9 @@ export default function LocaleLayout({
           </div>
         </main>
 
-        <Footer />
+        {/* ✅ Passa locale ao Footer */}
+        <Footer params={{ locale }} />
+
         <CookieBanner />
       </body>
     </html>
