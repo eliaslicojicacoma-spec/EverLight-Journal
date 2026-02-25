@@ -1,19 +1,19 @@
 [
   {
-    "id": "pt-sociedade-etica-digital-2026",
+    "id": "pt-society-etica-digital-2026",
     "locale": "pt",
     "slug": "etica-digital-verdade-ruido",
     "title": "Ética Digital: entre a verdade e o ruído",
     "excerpt": "Como navegar informação, desinformação e saúde mental num mundo sempre online — com princípios práticos e postura responsável.",
-    "category": "etica",
+    "category": "society",
     "tags": ["tecnologia", "cidadania", "saude-mental"],
-    "coverImage": "/images/blog/sociedade-etica-digital.jpg",
-    "ogImage": "/og/og-article.jpg",
+    "coverImage": "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?auto=format&fit=crop&w=1600&q=70",
+    "ogImage": "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?auto=format&fit=crop&w=1600&q=70",
     "publishedAt": "2026-02-24",
     "updatedAt": "2026-02-24",
     "author": {
       "name": "Elias Licoji Cacoma",
-      "image": "/images/autores/elias-licoji-cacoma.jpg"
+      "image": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=256&q=70"
     },
     "content": [
       "A internet trouxe acesso, voz e oportunidades. Mas também trouxe ruído, manipulação e pressão social.",
@@ -28,20 +28,20 @@
     ]
   },
   {
-    "id": "pt-adventista-ouvindo-voz-de-deus",
+    "id": "pt-adventist-ouvindo-voz-de-deus",
     "locale": "pt",
     "slug": "ouvindo-a-voz-de-deus-com-clareza",
     "title": "Ouvindo a Voz de Deus com clareza",
     "excerpt": "Como diferenciar impulso, emoção e direção espiritual com equilíbrio, Bíblia e disciplina diária.",
-    "category": "vida-espiritual",
+    "category": "adventist",
     "tags": ["oracao", "bible-study", "discipulado"],
-    "coverImage": "/images/blog/ouvindo-voz-de-deus.jpg",
-    "ogImage": "/og/og-article.jpg",
+    "coverImage": "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=70",
+    "ogImage": "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=70",
     "publishedAt": "2026-02-24",
     "updatedAt": "2026-02-24",
     "author": {
       "name": "Elias Licoji Cacoma",
-      "image": "/images/autores/elias-licoji-cacoma.jpg"
+      "image": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=256&q=70"
     },
     "content": [
       "Nem toda 'voz' interna é direção divina. Algumas são ansiedade, outras são desejo, outras são medo.",
@@ -64,15 +64,15 @@
     "slug": "leadership-character-consistency",
     "title": "Leadership is character under pressure",
     "excerpt": "Good leadership is consistency, clarity, and responsibility—especially when things get noisy.",
-    "category": "leadership",
+    "category": "society",
     "tags": ["leadership", "culture", "ethics"],
-    "coverImage": "/images/blog/leadership-character.jpg",
-    "ogImage": "/og/og-article.jpg",
+    "coverImage": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=70",
+    "ogImage": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=70",
     "publishedAt": "2026-02-24",
     "updatedAt": "2026-02-24",
     "author": {
       "name": "Elias Licoji Cacoma",
-      "image": "/images/autores/elias-licoji-cacoma.jpg"
+      "image": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=256&q=70"
     },
     "content": [
       "Leadership is what remains when shortcuts stop working.",
@@ -87,67 +87,67 @@
     ]
   },
   {
-  "id": "pt-sociedade-etica-digital-manipulacao",
-  "locale": "pt",
-  "slug": "etica-digital-como-navegar-informacao-sem-ser-manipulado",
-  "title": "Ética Digital: Como Navegar Informação Sem Ser Manipulado",
-  "excerpt": "Vivemos na era da informação ilimitada — mas também da manipulação invisível. Como verificar fontes, evitar distorções e proteger sua saúde mental.",
-  "category": "society",
-  "tags": ["etica-digital", "desinformacao", "pensamento-critico", "saude-mental"],
-  "coverImage": "/images/blog/etica-digital.jpg",
-  "ogImage": "/og/og-article.jpg",
-  "publishedAt": "2026-02-25",
-  "updatedAt": "2026-02-25",
-  "author": {
-    "name": "Elias Licoji Cacoma",
-    "image": "/images/autores/elias-licoji-cacoma.jpg"
-  },
-  "content": [
-    "Vivemos na era da informação ilimitada, mas também da manipulação invisível. Nunca tivemos tanto acesso a notícias, opiniões e dados.",
-    "Plataformas digitais funcionam com base na retenção de atenção. Conteúdos que provocam raiva ou medo circulam mais rapidamente.",
-    "O algoritmo aprende com o seu comportamento. Se você interage com indignação, receberá mais disso.",
-    "Cinco princípios essenciais:",
-    "1) Pause antes de compartilhar.",
-    "2) Verifique a origem.",
-    "3) Leia além do título.",
-    "4) Busque perspectivas diferentes.",
-    "5) Controle o tempo de tela.",
-    "Doomscrolling aumenta ansiedade e reduz clareza mental.",
-    "Aplicação prática:",
-    "- Regra dos 60 segundos antes de compartilhar.",
-    "- Limite diário de consumo.",
-    "- Curadoria consciente.",
-    "- Escolher profundidade em vez de quantidade.",
-    "Ética digital começa na decisão pessoal de pensar antes de reagir."
-  ]
+    "id": "pt-society-etica-digital-manipulacao",
+    "locale": "pt",
+    "slug": "etica-digital-como-navegar-informacao-sem-ser-manipulado",
+    "title": "Ética Digital: Como Navegar Informação Sem Ser Manipulado",
+    "excerpt": "Vivemos na era da informação ilimitada — mas também da manipulação invisível. Como verificar fontes, evitar distorções e proteger sua saúde mental.",
+    "category": "society",
+    "tags": ["etica-digital", "desinformacao", "pensamento-critico", "saude-mental"],
+    "coverImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=70",
+    "ogImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=70",
+    "publishedAt": "2026-02-25",
+    "updatedAt": "2026-02-25",
+    "author": {
+      "name": "Elias Licoji Cacoma",
+      "image": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=256&q=70"
+    },
+    "content": [
+      "Vivemos na era da informação ilimitada, mas também da manipulação invisível. Nunca tivemos tanto acesso a notícias, opiniões e dados.",
+      "Plataformas digitais funcionam com base na retenção de atenção. Conteúdos que provocam raiva ou medo circulam mais rapidamente.",
+      "O algoritmo aprende com o seu comportamento. Se você interage com indignação, receberá mais disso.",
+      "Cinco princípios essenciais:",
+      "1) Pause antes de compartilhar.",
+      "2) Verifique a origem.",
+      "3) Leia além do título.",
+      "4) Busque perspectivas diferentes.",
+      "5) Controle o tempo de tela.",
+      "Doomscrolling aumenta ansiedade e reduz clareza mental.",
+      "Aplicação prática:",
+      "- Regra dos 60 segundos antes de compartilhar.",
+      "- Limite diário de consumo.",
+      "- Curadoria consciente.",
+      "- Escolher profundidade em vez de quantidade.",
+      "Ética digital começa na decisão pessoal de pensar antes de reagir."
+    ]
   },
   {
-  "id": "pt-adventista-estudo-biblico-metodo",
-  "locale": "pt",
-  "slug": "como-estudar-a-biblia-sem-se-perder",
-  "title": "Como Estudar a Bíblia Sem Se Perder: Um Método Simples e Profundo",
-  "excerpt": "Descubra um método claro e prático para estudar a Bíblia com profundidade, contexto e aplicação real.",
-  "category": "adventist",
-  "tags": ["estudo-biblico", "vida-espiritual", "discipulado"],
-  "coverImage": "/images/blog/estudo-biblico.jpg",
-  "ogImage": "/og/og-article.jpg",
-  "publishedAt": "2026-02-25",
-  "updatedAt": "2026-02-25",
-  "author": {
-    "name": "Elias Licoji Cacoma",
-    "image": "/images/autores/elias-licoji-cacoma.jpg"
-  },
-  "content": [
-    "Muitas pessoas começam a estudar a Bíblia com entusiasmo, mas acabam frustradas por falta de método.",
-    "A Bíblia é composta por diferentes gêneros literários: história, profecia, poesia e cartas.",
-    "Método simples em quatro etapas:",
-    "1) Observação: Quem fala? Para quem? Em qual contexto?",
-    "2) Interpretação: O que o texto significava originalmente?",
-    "3) Aplicação: O que isso significa hoje?",
-    "4) Decisão: Qual passo concreto vou tomar?",
-    "Consistência é mais importante que duração. 20–30 minutos por dia produzem crescimento sólido.",
-    "O verdadeiro teste do estudo bíblico não é quanto você sabe, mas quanto você mudou.",
-    "Disciplina forma entendimento. Intimidade com Deus nasce da prática diária."
-  ]
+    "id": "pt-adventist-estudo-biblico-metodo",
+    "locale": "pt",
+    "slug": "como-estudar-a-biblia-sem-se-perder",
+    "title": "Como Estudar a Bíblia Sem Se Perder: Um Método Simples e Profundo",
+    "excerpt": "Descubra um método claro e prático para estudar a Bíblia com profundidade, contexto e aplicação real.",
+    "category": "adventist",
+    "tags": ["estudo-biblico", "vida-espiritual", "discipulado"],
+    "coverImage": "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=70",
+    "ogImage": "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1600&q=70",
+    "publishedAt": "2026-02-25",
+    "updatedAt": "2026-02-25",
+    "author": {
+      "name": "Elias Licoji Cacoma",
+      "image": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=256&q=70"
+    },
+    "content": [
+      "Muitas pessoas começam a estudar a Bíblia com entusiasmo, mas acabam frustradas por falta de método.",
+      "A Bíblia é composta por diferentes gêneros literários: história, profecia, poesia e cartas.",
+      "Método simples em quatro etapas:",
+      "1) Observação: Quem fala? Para quem? Em qual contexto?",
+      "2) Interpretação: O que o texto significava originalmente?",
+      "3) Aplicação: O que isso significa hoje?",
+      "4) Decisão: Qual passo concreto vou tomar?",
+      "Consistência é mais importante que duração. 20–30 minutos por dia produzem crescimento sólido.",
+      "O verdadeiro teste do estudo bíblico não é quanto você sabe, mas quanto você mudou.",
+      "Disciplina forma entendimento. Intimidade com Deus nasce da prática diária."
+    ]
   }
-]
+    ]
