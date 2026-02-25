@@ -1,110 +1,129 @@
+// src/app/[locale]/page.tsx
+import Image from "next/image";
 import Link from "next/link";
-import FeaturedPosts from "@/components/home/FeaturedPosts";
 
-export default async function HomePage({
-  params
-}: {
-  params: Promise<{ locale: "pt" | "en" }>;
-}) {
-  const { locale } = await params;
+type PageProps = {
+  params: { locale: string };
+};
+
+export default function HomePage({ params }: PageProps) {
+  const locale = params?.locale ?? "pt";
+
+  const isPT = locale === "pt";
+
+  const title = "EverLight Journal";
+  const subtitle = isPT
+    ? "Sociedade com visão global, fé com profundidade. Conteúdo original, moderno e confiável."
+    : "Society with global vision, faith with depth. Original, modern, trustworthy content.";
+
+  const ctaPrimary = isPT ? "Ver Society" : "See Society";
+  const ctaSecondary = isPT ? "Ver Adventist" : "See Adventist";
 
   return (
-    <div className="space-y-10">
-      <section className="rounded-3xl border border-zinc-200 bg-gradient-to-br from-white to-zinc-50 p-7 shadow-sm
-                          dark:border-white/10 dark:from-white/5 dark:to-white/0">
-        <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-extrabold
-                        border-zinc-200 bg-white text-zinc-700
-                        dark:border-white/10 dark:bg-white/5 dark:text-white/80">
-          PT/EN • Revista Digital • AdSense-ready
+    <main className="min-h-screen bg-black text-white">
+      {/* HERO */}
+      <section className="relative min-h-[78vh] overflow-hidden">
+        {/* Background image */}
+        <Image
+          src="/images/hero/hero.jpg"
+          alt="Hero background"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/60" />
+
+        {/* Soft gradient overlay (gives the “premium” vibe) */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/90" />
+
+        {/* Content */}
+        <div className="relative mx-auto flex min-h-[78vh] max-w-6xl items-center px-5 py-16">
+          <div className="w-full max-w-3xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs text-white/80 backdrop-blur">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              {isPT ? "PT/EN • Revista Digital • SEO-ready" : "PT/EN • Digital Magazine • SEO-ready"}
+            </div>
+
+            <h1 className="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
+              {title}
+            </h1>
+
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+              {subtitle}
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href={`/${locale}/society`}
+                className="rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-black shadow-lg shadow-black/30 transition hover:opacity-90"
+              >
+                {ctaPrimary}
+              </Link>
+
+              <Link
+                href={`/${locale}/adventist`}
+                className="rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15"
+              >
+                {ctaSecondary}
+              </Link>
+
+              <Link
+                href={`/${locale}/library`}
+                className="rounded-2xl border border-white/15 bg-black/10 px-5 py-3 text-sm font-semibold text-white/90 backdrop-blur transition hover:bg-white/10"
+              >
+                {isPT ? "Ir para Biblioteca" : "Go to Library"}
+              </Link>
+            </div>
+          </div>
         </div>
 
-        <h1 className="mt-4 text-4xl font-extrabold tracking-tight md:text-5xl">
-          EverLight Journal
-        </h1>
-
-        <p className="mt-3 max-w-2xl text-base text-zinc-600 dark:text-white/70">
-          {locale === "pt"
-            ? "Sociedade com visão global, fé com profundidade. Conteúdo original, moderno e confiável."
-            : "Global society, grounded faith. Original, modern, trustworthy content."}
-        </p>
-
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href={`/${locale}/society`}
-            className="rounded-2xl bg-zinc-900 px-5 py-3 text-sm font-extrabold text-white hover:bg-zinc-800
-                       dark:bg-white dark:text-zinc-950 dark:hover:bg-white/90"
-          >
-            {locale === "pt" ? "Ver Society" : "Go to Society"}
-          </Link>
-
-          <Link
-            href={`/${locale}/adventist`}
-            className="rounded-2xl border px-5 py-3 text-sm font-extrabold
-                       border-zinc-200 bg-white text-zinc-900 hover:bg-zinc-50
-                       dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
-          >
-            {locale === "pt" ? "Ver Adventist" : "Go to Adventist"}
-          </Link>
-
-          <Link
-            href={`/${locale}/library`}
-            className="rounded-2xl border px-5 py-3 text-sm font-extrabold
-                       border-zinc-200 bg-white text-zinc-900 hover:bg-zinc-50
-                       dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
-          >
-            {locale === "pt" ? "Ir para Biblioteca" : "Go to Library"}
-          </Link>
-
-          <Link
-            href={`/${locale}/verse-of-day`}
-            className="rounded-2xl border px-5 py-3 text-sm font-extrabold
-                       border-zinc-200 bg-white text-zinc-900 hover:bg-zinc-50
-                       dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
-          >
-            {locale === "pt" ? "Versículo do Dia" : "Verse of the Day"}
-          </Link>
-        </div>
+        {/* Bottom “waves / glow” effect */}
+        <div className="pointer-events-none absolute -bottom-24 left-1/2 h-72 w-[900px] -translate-x-1/2 rounded-full bg-gradient-to-r from-indigo-500/30 via-cyan-400/20 to-emerald-400/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-40 left-1/2 h-72 w-[1100px] -translate-x-1/2 rounded-full bg-gradient-to-r from-blue-500/20 via-purple-500/15 to-pink-500/15 blur-3xl" />
       </section>
 
-      <section className="grid gap-4 md:grid-cols-3">
-        {[
-          {
-            title: "Society",
-            desc:
-              locale === "pt"
+      {/* BELOW HERO */}
+      <section className="mx-auto max-w-6xl px-5 py-10">
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+            <h2 className="text-lg font-semibold">{isPT ? "Society" : "Society"}</h2>
+            <p className="mt-2 text-sm text-white/70">
+              {isPT
                 ? "Atualidade com clareza, contexto e ação."
-                : "News with clarity, context, and action."
-          },
-          {
-            title: "Adventist",
-            desc:
-              locale === "pt"
-                ? "Curadoria + aplicação prática. Fé com inteligência."
-                : "Curation + practical application. Faith with depth."
-          },
-          {
-            title: "Library",
-            desc:
-              locale === "pt"
-                ? "Links oficiais e seguros (EGW + recursos missionários)."
-                : "Official, safe links (EGW + mission resources)."
-          }
-        ].map((c) => (
-          <div
-            key={c.title}
-            className="rounded-2xl border p-5 shadow-sm
-                       border-zinc-200 bg-white
-                       dark:border-white/10 dark:bg-white/5"
-          >
-            <h3 className="text-lg font-extrabold">{c.title}</h3>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-white/70">
-              {c.desc}
+                : "Current topics with clarity, context, and action."}
             </p>
           </div>
-        ))}
-      </section>
 
-      <FeaturedPosts locale={locale} />
-    </div>
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+            <h2 className="text-lg font-semibold">{isPT ? "Adventist" : "Adventist"}</h2>
+            <p className="mt-2 text-sm text-white/70">
+              {isPT
+                ? "Curadoria + aplicação prática. Fé com inteligência."
+                : "Curated + practical. Faith with clarity."}
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+            <h2 className="text-lg font-semibold">{isPT ? "Library" : "Library"}</h2>
+            <p className="mt-2 text-sm text-white/70">
+              {isPT
+                ? "Links oficiais e seguros (EGW + recursos)."
+                : "Official and safe links (EGW + resources)."}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-10 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 p-6">
+          <h3 className="text-base font-semibold">{isPT ? "Próximo passo" : "Next step"}</h3>
+          <p className="mt-2 text-sm text-white/70">
+            {isPT
+              ? "Agora o site já tem presença visual forte. Próximo upgrade: imagens por categoria (Society/Adventist) e cards do blog com thumbnails."
+              : "Now your site has a strong visual identity. Next upgrade: category hero images and blog cards with thumbnails."}
+          </p>
+        </div>
+      </section>
+    </main>
   );
-}
+              }
