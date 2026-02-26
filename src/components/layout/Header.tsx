@@ -92,4 +92,4 @@ export default function Header({ locale }: { locale: string }) {
       </div>
     </header>
   );
-                    }
+}
