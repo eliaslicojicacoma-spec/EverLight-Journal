@@ -1,19 +1,49 @@
-/* src/app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --bg: #F6F4EF;
-  --fg: #121212;
-  --muted: #6b6b6b;
-  --card: rgba(255,255,255,0.72);
-  --stroke: rgba(18,18,18,0.12);
-  --brand: #1A2A78;
-  --gold: #D8C78C;
+:root {
+  --bg: 246 244 239;        /* #F6F4EF */
+  --fg: 18 18 18;           /* #121212 */
+
+  --card: 255 255 255;      /* white */
+  --cardBorder: 0 0 0;      /* black (usado com opacity) */
+
+  --muted: 107 107 107;     /* #6B6B6B */
+  --accent: 26 42 120;      /* #1A2A78 */
+  --gold: 216 199 140;      /* #D8C78C */
 }
 
-html, body { height: 100%; }
-body { background: var(--bg); color: var(--fg); }
+html, body {
+  height: 100%;
+}
 
-::selection { background: rgba(216,199,140,0.55); }
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* seleção bonita */
+::selection{
+  background: rgba(26, 42, 120, .20);
+}
+
+/* container padrão */
+.container-xl{
+  @apply mx-auto w-full max-w-6xl px-4;
+}
+
+/* cartão premium reutilizável */
+.card{
+  @apply rounded-[28px] border bg-white shadow-sm;
+  border-color: rgba(0,0,0,.08);
+}
+
+/* blur premium */
+.glass{
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(0,0,0,.08);
+  backdrop-filter: blur(10px);
+}
