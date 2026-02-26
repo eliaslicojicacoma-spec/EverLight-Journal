@@ -18,7 +18,7 @@ export type BlogPost = {
   publishedAt: string; // YYYY-MM-DD
   updatedAt?: string;  // YYYY-MM-DD
   author?: BlogAuthor;
-  content: string[]; // linhas markdown-lite
+  content: string[];
 };
 
 function isBlogPost(x: any): x is BlogPost {
@@ -42,10 +42,8 @@ export function getPostBySlug(locale: string, slug: string): BlogPost | null {
 }
 
 export function estimateReadingTimeMinutes(text: string): number {
-  // ~200 palavras/min (padrão editorial)
   const words = text.trim().split(/\s+/).filter(Boolean).length;
-  const minutes = Math.max(1, Math.round(words / 200));
-  return minutes;
+  return Math.max(1, Math.round(words / 200));
 }
 
 export function getPostReadingTime(post: BlogPost): number {
@@ -65,13 +63,7 @@ export function getRelatedPosts(locale: string, post: BlogPost, limit = 3): Blog
       let score = 0;
 
       if (category && (p.category ?? "").toLowerCase() === category) score += 3;
-
-      for (const t of tags) {
-        if (pTags.has(t)) score += 1;
-      }
-
-      // Leve boost por recência
-      score += p.publishedAt ? 0.2 : 0;
+      for (const t of tags) if (pTags.has(t)) score += 1;
 
       return { p, score };
     })
@@ -81,7 +73,6 @@ export function getRelatedPosts(locale: string, post: BlogPost, limit = 3): Blog
 }
 
 export function formatDate(dateISO: string, locale: string): string {
-  // Evita bugs de timezone: trata como data “pura”
   const [y, m, d] = dateISO.split("-").map(Number);
   const dt = new Date(Date.UTC(y, (m ?? 1) - 1, d ?? 1));
   return new Intl.DateTimeFormat(locale === "pt" ? "pt-PT" : "en-US", {
@@ -90,4 +81,4 @@ export function formatDate(dateISO: string, locale: string): string {
     day: "2-digit",
     timeZone: "UTC",
   }).format(dt);
-    }
+}
