@@ -1,77 +1,54 @@
+// src/app/[locale]/blog/page.tsx
 import Image from "next/image";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
 
 export default function BlogPage({ params }: { params: { locale: string } }) {
-  const locale = params?.locale ?? "pt";
+  const { locale } = params;
   const isPT = locale === "pt";
 
   const posts = getAllPosts(locale);
 
   return (
-    <main className="space-y-8">
-      <section className="relative overflow-hidden rounded-[28px] border border-black/10 bg-white p-8">
-        <div className="absolute inset-0 opacity-[0.35]">
-          <Image
-            src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=2200&q=70"
-            alt="Blog hero"
-            fill
-            className="object-cover"
-          />
+    <div className="space-y-8">
+      <header className="rounded-[28px] border border-black/10 bg-white p-6">
+        <div className="text-[11px] tracking-[0.22em] text-black/60">
+          {isPT ? "ARTIGOS & REFLEXÕES" : "ARTICLES & REFLECTIONS"}
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/75 to-white" />
-        <div className="relative">
-          <div className="text-[11px] tracking-[0.22em] text-black/60">
-            {isPT ? "ARTIGOS • CLAREZA • APLICAÇÃO" : "ARTICLES • CLARITY • ACTION"}
-          </div>
-          <h1 className="mt-4 text-4xl font-semibold tracking-tight">
-            {isPT ? "Blog" : "Blog"}
-          </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-black/65">
-            {isPT
-              ? "Conteúdo original com contexto, resumo e passos práticos. Sem copiar artigos. Sem sensacionalismo."
-              : "Original content with context, summaries, and practical steps. No copy-paste. No sensationalism."}
-          </p>
-        </div>
-      </section>
+        <h1 className="mt-3 text-3xl font-semibold">{isPT ? "Blog" : "Blog"}</h1>
+        <p className="mt-2 max-w-2xl text-sm text-black/60">
+          {isPT
+            ? "Conteúdo original com clareza, fontes e aplicação prática."
+            : "Original content with clarity, sources, and practical application."}
+        </p>
+      </header>
 
-      <section className="grid gap-6 md:grid-cols-2">
+      <section className="grid gap-4 md:grid-cols-2">
         {posts.map((p) => (
-          <Link
-            key={p.id}
-            href={`/${locale}/blog/${p.slug}`}
-            className="group overflow-hidden rounded-[26px] border border-black/10 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-          >
-            <div className="relative aspect-[16/10] w-full bg-black/5">
-              <Image src={p.coverImage} alt={p.title} fill className="object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/10 to-transparent" />
-              <div className="absolute left-5 top-5 rounded-full bg-white/80 px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-black backdrop-blur">
-                {p.category.toUpperCase()}
-              </div>
+          <article key={p.id} className="overflow-hidden rounded-[24px] border border-black/10 bg-white">
+            <div className="relative h-44 bg-[#E9E6DF]">
+              <Image
+                src={p.coverImage.startsWith("http") ? p.coverImage : p.coverImage}
+                alt={p.title}
+                fill
+                className="object-cover"
+              />
             </div>
+            <div className="p-5">
+              <div className="text-[11px] tracking-[0.22em] text-black/50">{p.category}</div>
+              <h2 className="mt-2 text-xl font-semibold">{p.title}</h2>
+              <p className="mt-2 text-sm text-black/60">{p.excerpt}</p>
 
-            <div className="p-6">
-              <h2 className="text-2xl font-semibold leading-tight">{p.title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-black/65">{p.excerpt}</p>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                {p.tags?.slice(0, 3).map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-black/10 bg-black/5 px-3 py-1 text-[11px] font-semibold text-black/70"
-                  >
-                    #{t}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-6 text-xs font-semibold tracking-wide text-black underline decoration-black/20 underline-offset-4">
-                {isPT ? "LER ARTIGO →" : "READ →"}
-              </div>
+              <Link
+                href={`/${locale}/blog/${p.slug}`}
+                className="mt-4 inline-block text-xs font-semibold underline decoration-black/20 underline-offset-4 hover:decoration-black/60"
+              >
+                {isPT ? "Ler →" : "Read →"}
+              </Link>
             </div>
-          </Link>
+          </article>
         ))}
       </section>
-    </main>
+    </div>
   );
 }
