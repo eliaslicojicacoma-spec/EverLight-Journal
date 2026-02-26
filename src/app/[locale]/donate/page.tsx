@@ -58,9 +58,9 @@ function DonateCard({ label, value }: { label: string; value: string }) {
   async function copyToClipboard() {
     try {
       await navigator.clipboard.writeText(value);
-      // sem alert feio — UX limpa (e mobile-friendly)
+      
     } catch {
-      // se clipboard falhar, o usuário ainda consegue copiar manualmente
+      
     }
   }
 
