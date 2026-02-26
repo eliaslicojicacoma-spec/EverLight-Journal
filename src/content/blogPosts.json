@@ -1,0 +1,17 @@
+[
+  {
+    "id": "pt-sociedade-etica-digital-2026",
+    "locale": "pt",
+    "slug": "etica-digital-verdade-ruido",
+    "title": "Ética Digital: entre a verdade e o ruído",
+    "excerpt": "Como navegar informação, desinformação e saúde mental num mundo sempre online — com princípios práticos e postura responsável.",
+    "category": "etica",
+    "tags": ["tecnologia", "cidadania", "saude-mental"],
+    "coverImage": "/images/blog/sociedade-etica-digital.jpg",
+    "ogImage": "/og/og-article.jpg",
+    "publishedAt": "2026-02-24",
+    "updatedAt": "2026-02-24",
+    "author": { "name": "Elias Licoji Cacoma", "image": "/images/autores/elias-licoji-cacoma.jpg" },
+    "content": ["Texto..."]
+  }
+]
