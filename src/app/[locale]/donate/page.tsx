@@ -16,8 +16,8 @@ export default function DonatePage({ params }: { params: { locale: string } }) {
     opt2: isPT ? "Apoio mensal" : "Monthly support",
     opt3: isPT ? "Divulgar o projeto" : "Share the project",
     note: isPT
-      ? "Nota: Aqui podes ligar com PayPal/Stripe/transferência depois. Por agora deixamos a estrutura premium pronta."
-      : "Note: You can connect PayPal/Stripe/bank later. For now we ship a premium-ready structure.",
+      ? "PayPal:eliaslicojicacoma@gmail.com"
+      : "Pix:elias-licoji-cacoma-273@jim.com",
     cta: isPT ? "Voltar ao Blog" : "Back to Blog",
   };
 
