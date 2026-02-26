@@ -1,4 +1,3 @@
-// src/app/api/subscribe/route.ts
 import { NextResponse } from "next/server";
 
 function isValidEmail(email: string) {
