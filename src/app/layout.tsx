@@ -1,16 +1,17 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "EverLight Journal",
   description: "Sociedade com visão global, fé com profundidade.",
-  metadataBase: new URL("https://ever-light-journal.vercel.app"),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt">
-      <body className="min-h-screen bg-[#F6F4EF] text-[#121212]">{children}</body>
+    <html lang="pt" suppressHydrationWarning>
+      <body className="min-h-screen bg-[#F6F4EF] text-[#121212] dark:bg-zinc-950 dark:text-white">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }
