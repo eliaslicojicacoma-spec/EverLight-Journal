@@ -15,14 +15,16 @@ export type BlogPost = {
   tags?: string[];
   coverImage?: string;
   ogImage?: string;
-  publishedAt: string; // YYYY-MM-DD
-  updatedAt?: string;  // YYYY-MM-DD
+  publishedAt: string;
+  updatedAt?: string;
   author?: BlogAuthor;
   content: string[];
 };
 
-function isBlogPost(x: any): x is BlogPost {
-  return x && typeof x === "object" && typeof x.slug === "string" && Array.isArray(x.content);
+function isBlogPost(x: unknown): x is BlogPost {
+  if (!x || typeof x !== "object") return false;
+  const p = x as Record<string, unknown>;
+  return typeof p.slug === "string" && Array.isArray(p.content);
 }
 
 export function getAllPosts(): BlogPost[] {
