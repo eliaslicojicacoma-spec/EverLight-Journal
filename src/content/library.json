@@ -1,0 +1,35 @@
+[
+  {
+    "id": "egw-writings-portal",
+    "type": "collection",
+    "title_pt": "Ellen G. White — EGW Writings (Oficial)",
+    "title_en": "Ellen G. White — EGW Writings (Official)",
+    "desc_pt": "Acesso oficial a livros, artigos e compilações de Ellen G. White.",
+    "desc_en": "Official access to Ellen G. White books, articles, and compilations.",
+    "href": "https://egwwritings.org/",
+    "badge_pt": "OFICIAL",
+    "badge_en": "OFFICIAL"
+  },
+  {
+    "id": "egw-books",
+    "type": "collection",
+    "title_pt": "Livros (Biblioteca Online)",
+    "title_en": "Books (Online Library)",
+    "desc_pt": "Explora livros e compilações diretamente no EGW Writings.",
+    "desc_en": "Browse books and compilations directly on EGW Writings.",
+    "href": "https://egwwritings.org/books",
+    "badge_pt": "LINK",
+    "badge_en": "LINK"
+  },
+  {
+    "id": "egw-search",
+    "type": "tool",
+    "title_pt": "Pesquisar por tema/verso",
+    "title_en": "Search by topic/verse",
+    "desc_pt": "Pesquisa rápida por palavras-chave, temas e referências.",
+    "desc_en": "Quick search by keywords, topics, and references.",
+    "href": "https://egwwritings.org/search",
+    "badge_pt": "PESQUISA",
+    "badge_en": "SEARCH"
+  }
+]
