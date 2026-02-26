@@ -1,4 +1,3 @@
-// src/components/layout/Header.tsx
 import Link from "next/link";
 
 export default function Header({ locale }: { locale: string }) {
