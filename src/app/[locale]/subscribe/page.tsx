@@ -1,71 +1,60 @@
-import Link from "next/link";
+import { NextResponse } from "next/server";
 
-export default function SubscribePage({
-  params,
-}: {
-  params: { locale: string };
-}) {
-  const locale = params?.locale ?? "pt";
-  const isPT = locale === "pt";
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
-  return (
-    <main className="space-y-10">
-      <section className="card overflow-hidden p-6 sm:p-10">
-        <div className="max-w-3xl">
-          <div className="text-[11px] tracking-[0.22em] text-black/55">
-            {isPT ? "NEWSLETTER OFICIAL" : "OFFICIAL NEWSLETTER"}
-          </div>
+export async function POST(req: Request) {
+  try {
+    const formData = await req.formData();
+    const email = (formData.get("email") || "").toString().trim();
+    const locale = ((formData.get("locale") || "pt").toString().trim() || "pt") as "pt" | "en";
 
-          <h1 className="mt-4 text-4xl font-semibold sm:text-5xl">
-            {isPT
-              ? "Receba fé e clareza direto no seu e-mail"
-              : "Receive faith and clarity in your inbox"}
-          </h1>
+    if (!email || !isValidEmail(email)) {
+      return NextResponse.redirect(new URL(`/${locale}/subscribe?status=invalid`, req.url));
+    }
 
-          <p className="mt-5 text-sm leading-relaxed text-black/60 sm:text-base">
-            {isPT
-              ? "Artigos exclusivos, reflexões semanais e conteúdos estratégicos sobre fé e sociedade. Sem spam. Apenas valor real."
-              : "Exclusive articles, weekly reflections and strategic insights about faith and society. No spam. Only value."}
-          </p>
+    const apiKey = process.env.BREVO_API_KEY;
+    const listIdRaw = process.env.BREVO_LIST_ID;
 
-          {/* FORM */}
-          <form
-            action="/api/subscribe"
-            method="POST"
-            className="mt-8 flex flex-col gap-4 sm:flex-row"
-          >
-            <input
-              type="email"
-              name="email"
-              required
-              placeholder={isPT ? "Seu melhor e-mail" : "Your best email"}
-              className="w-full rounded-2xl border border-black/15 px-5 py-3 text-sm outline-none focus:border-black"
-            />
+    if (!apiKey || !listIdRaw) {
+      return NextResponse.redirect(new URL(`/${locale}/subscribe?status=server`, req.url));
+    }
 
-            <button
-              type="submit"
-              className="rounded-2xl bg-black px-6 py-3 text-xs font-semibold tracking-wide text-white hover:opacity-90"
-            >
-              {isPT ? "Inscrever-se" : "Subscribe"}
-            </button>
-          </form>
+    const listId = Number(listIdRaw);
+    if (!Number.isFinite(listId)) {
+      return NextResponse.redirect(new URL(`/${locale}/subscribe?status=server`, req.url));
+    }
 
-          <p className="mt-4 text-xs text-black/45">
-            {isPT
-              ? "Ao inscrever-se, você concorda com nossa política de privacidade."
-              : "By subscribing you agree to our privacy policy."}
-          </p>
+    // 1) Criar/atualizar contacto no Brevo
+    const createContactRes = await fetch("https://api.brevo.com/v3/contacts", {
+      method: "POST",
+      headers: {
+        "api-key": apiKey,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        updateEnabled: true,
+        listIds: [listId],
+        attributes: {
+          LOCALE: locale.toUpperCase(), // PT / EN
+          SOURCE: "EverLight Subscribe",
+        },
+      }),
+    });
 
-          <div className="mt-6">
-            <Link
-              href={`/${locale}`}
-              className="text-xs font-semibold underline decoration-black/20 underline-offset-4 hover:decoration-black/60"
-            >
-              {isPT ? "← Voltar ao site" : "← Back to site"}
-            </Link>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
+    // Brevo pode responder 201 (created) ou 204/400 em casos específicos.
+    // Se já existir e updateEnabled=true, normalmente fica ok.
+    if (!createContactRes.ok) {
+      // Em alguns casos, Brevo devolve detalhes no json
+      return NextResponse.redirect(new URL(`/${locale}/subscribe?status=error`, req.url));
+    }
+
+    return NextResponse.redirect(new URL(`/${locale}/subscribe?status=ok`, req.url));
+  } catch {
+    // fallback
+    return NextResponse.redirect(new URL(`/pt/subscribe?status=error`, req.url));
+  }
 }
