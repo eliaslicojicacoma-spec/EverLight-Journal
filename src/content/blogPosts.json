@@ -11,7 +11,18 @@
     "ogImage": "/og/og-article.jpg",
     "publishedAt": "2026-02-24",
     "updatedAt": "2026-02-24",
-    "author": { "name": "Elias Licoji Cacoma", "image": "/images/autores/elias-licoji-cacoma.jpg" },
-    "content": ["Texto..."]
+    "author": {
+      "name": "Elias Licoji Cacoma",
+      "image": "/images/autores/elias-licoji-cacoma.jpg"
+    },
+    "content": [
+      "A internet trouxe acesso, voz e oportunidades. Mas também trouxe ruído, manipulação e pressão social.",
+      "## O problema não é a tecnologia — é o uso",
+      "Quando a atenção vira produto, a tua mente vira mercado. E aí: a ética não é teoria, é sobrevivência.",
+      "## 3 práticas simples (e poderosas)",
+      "- Verifica a fonte antes de partilhar.",
+      "- Não discutas no calor — responde com calma (ou não responde).",
+      "- Faz higiene mental: horários offline e silêncio intencional."
+    ]
   }
 ]
