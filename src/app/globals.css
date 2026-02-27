@@ -26,25 +26,22 @@
   color: var(--text);
 }
 
-.el-surface {
-  background: var(--surface);
-  border: 1px solid var(--border);
-}
-
-.el-surface-2 {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-                }
 .el-bg {
-  background: radial-gradient(900px 500px at 20% 10%, rgba(216, 199, 140, 0.25), transparent 55%),
-              radial-gradient(900px 500px at 85% 20%, rgba(125, 211, 252, 0.20), transparent 55%),
-              radial-gradient(900px 500px at 55% 90%, rgba(251, 113, 133, 0.12), transparent 60%),
-              #F6F4EF;
+  background:
+    radial-gradient(900px 500px at 20% 10%, rgba(216, 199, 140, 0.25), transparent 55%),
+    radial-gradient(900px 500px at 85% 20%, rgba(125, 211, 252, 0.20), transparent 55%),
+    radial-gradient(900px 500px at 55% 90%, rgba(251, 113, 133, 0.12), transparent 60%),
+    var(--bg);
+
+  color: var(--text);
 }
 
 .dark .el-bg {
-  background: radial-gradient(900px 500px at 20% 10%, rgba(245, 158, 11, 0.12), transparent 55%),
-              radial-gradient(900px 500px at 85% 20%, rgba(56, 189, 248, 0.10), transparent 55%),
-              radial-gradient(900px 500px at 55% 90%, rgba(244, 63, 94, 0.10), transparent 60%),
-              #09090b;
+  background:
+    radial-gradient(900px 500px at 20% 10%, rgba(245, 158, 11, 0.12), transparent 55%),
+    radial-gradient(900px 500px at 85% 20%, rgba(56, 189, 248, 0.10), transparent 55%),
+    radial-gradient(900px 500px at 55% 90%, rgba(244, 63, 94, 0.10), transparent 60%),
+    #09090b;
+
+  color: var(--text);
 }
