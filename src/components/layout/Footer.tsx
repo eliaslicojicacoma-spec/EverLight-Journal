@@ -1,6 +1,8 @@
 import Link from "next/link";
 
-export default function Footer({ locale }: { locale: string }) {
+type Props = { locale: string };
+
+export default function Footer({ locale }: Props) {
   const isPT = locale === "pt";
 
   const t = {
@@ -22,9 +24,17 @@ export default function Footer({ locale }: { locale: string }) {
     contact: isPT ? "Contato" : "Contact",
     privacy: isPT ? "Política de Privacidade" : "Privacy Policy",
     terms: isPT ? "Termos de Uso" : "Terms of Use",
+    follow: isPT ? "Siga-nos nas redes sociais" : "Follow us on social media",
   };
 
   const homeNewsletter = `/${locale}#newsletter`;
+
+  const socials: Array<{ name: string; href: string | null; label: string }> = [
+    { name: "f", href: "https://facebook.com/EliasCacoma", label: "Facebook" },
+    { name: "⌁", href: "https://instagram.com/EliasCacoma", label: "Instagram" },
+    { name: "▶", href: null, label: "YouTube" }, // se tiver, troca para: "https://youtube.com/@teucanal"
+    { name: "in", href: null, label: "LinkedIn" }, // se tiver, troca para: "https://linkedin.com/in/teuperfil"
+  ];
 
   return (
     <footer className="mt-16 border-t border-black/10 dark:border-white/10">
@@ -52,36 +62,84 @@ export default function Footer({ locale }: { locale: string }) {
         <div>
           <h4 className="text-sm font-semibold tracking-wide">{t.quick}</h4>
           <ul className="mt-4 space-y-2 text-sm text-black/70 dark:text-white/70">
-            <li><Link className="hover:underline" href={`/${locale}/blog`}>{t.blog}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/society`}>{t.society}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/library`}>{t.books}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/adventist`}>{t.devotionals}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/about`}>{t.about}</Link></li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/blog`}>
+                {t.blog}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/society`}>
+                {t.society}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/library`}>
+                {t.books}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/adventist`}>
+                {t.devotionals}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/about`}>
+                {t.about}
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div>
           <h4 className="text-sm font-semibold tracking-wide">{t.resources}</h4>
           <ul className="mt-4 space-y-2 text-sm text-black/70 dark:text-white/70">
-            <li><Link className="hover:underline" href={`/${locale}/donate`}>{t.support}</Link></li>
-            <li><Link className="hover:underline" href={homeNewsletter}>{t.newsletter}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/contact`}>{t.contact}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/privacy`}>{t.privacy}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/terms`}>{t.terms}</Link></li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/donate`}>
+                {t.support}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={homeNewsletter}>
+                {t.newsletter}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/contact`}>
+                {t.contact}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/privacy`}>
+                {t.privacy}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/terms`}>
+                {t.terms}
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div>
           <h4 className="text-sm font-semibold tracking-wide">{t.connect}</h4>
-          <p className="mt-4 text-sm text-black/60 dark:text-white/70">
-            {isPT ? "Siga-nos nas redes sociais" : "Follow us on social media"}
-          </p>
+          <p className="mt-4 text-sm text-black/60 dark:text-white/70">{t.follow}</p>
 
           <div className="mt-4 flex items-center gap-3">
-            <a className="grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white/60 text-sm dark:border-white/10 dark:bg-white/5" href="#" aria-label="Facebook">f</a>
-            <a className="grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white/60 text-sm dark:border-white/10 dark:bg-white/5" href="#" aria-label="Instagram">⌁</a>
-            <a className="grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white/60 text-sm dark:border-white/10 dark:bg-white/5" href="#" aria-label="YouTube">▶</a>
-            <a className="grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white/60 text-sm dark:border-white/10 dark:bg-white/5" href="#" aria-label="LinkedIn">in</a>
+            {socials
+              .filter((s) => Boolean(s.href))
+              .map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href as string}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white/60 text-sm text-black shadow-sm hover:bg-white/80 active:scale-95 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+                >
+                  {s.name}
+                </a>
+              ))}
           </div>
 
           <Link
@@ -98,4 +156,4 @@ export default function Footer({ locale }: { locale: string }) {
       </div>
     </footer>
   );
-}
+            }
