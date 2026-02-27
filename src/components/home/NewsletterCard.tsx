@@ -1,27 +1,29 @@
+"use client";
+
 import SubscribeForm from "@/components/subscribe/SubscribeForm";
 
-export default function NewsletterCard() {
+export default function NewsletterCard({ locale }: { locale: string }) {
+  const isPT = locale === "pt";
+
   return (
-    <div className="card p-6">
-      <div className="text-[11px] tracking-[0.22em] text-black/55 dark:text-white/55">
+    <section id="newsletter" className="card p-6">
+      <div className="text-[11px] tracking-[0.22em] text-black/55 dark:text-white/60">
         NEWSLETTER
       </div>
 
-      <h3 className="mt-2 text-lg font-semibold text-black dark:text-white">
-        Recebe conteúdo premium no email
+      <h3 className="mt-2 text-lg font-semibold">
+        {isPT ? "Recebe conteúdo premium no email" : "Get premium content by email"}
       </h3>
 
-      <p className="mt-2 text-sm leading-relaxed text-black/60 dark:text-white/70">
-        Sem spam. Só resumos, estudos e links oficiais — com aplicação prática.
+      <p className="mt-2 text-sm text-black/60 dark:text-white/70">
+        {isPT
+          ? "Sem spam. Só resumos, estudos e links oficiais — com aplicação prática."
+          : "No spam. Only summaries, studies and official links — with practical steps."}
       </p>
 
       <div className="mt-4">
-        <SubscribeForm />
+        <SubscribeForm locale={locale} />
       </div>
-
-      <p className="mt-3 text-xs text-black/50 dark:text-white/50">
-        Ao inscrever-se, concordas com a Política de Privacidade.
-      </p>
-    </div>
+    </section>
   );
 }
