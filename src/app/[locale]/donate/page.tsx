@@ -21,7 +21,7 @@ export default function DonatePage({ params }: { params: { locale: string } }) {
     thanks: isPT ? "Obrigado por apoiar. Deus te abençoe. 🙏🏽" : "Thanks for supporting. God bless you. 🙏🏽",
   };
 
-  // ✅ teus dados
+  
   const PIX_KEY = "elias-licoji-cacoma-273@jim.com";
   const PAYPAL_EMAIL = "eliaslicojicacoma@gmail.com";
 
