@@ -1,4 +1,4 @@
-import blogPosts from "@/content/blogPosts.json";
+import blogPosts from "@/data/blogPosts.json";
 
 export type BlogAuthor = {
   name: string;
