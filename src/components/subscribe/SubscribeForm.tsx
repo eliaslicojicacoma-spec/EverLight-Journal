@@ -2,10 +2,18 @@
 
 import { useState } from "react";
 
-export default function SubscribeForm() {
+type Props = {
+  locale?: string;
+};
+
+export default function SubscribeForm({ locale = "pt" }: Props) {
+  const isPT = locale === "pt";
+
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle"
+  );
+  const [message, setMessage] = useState<string>("");
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -15,55 +23,71 @@ export default function SubscribeForm() {
     try {
       const res = await fetch("/api/subscribe", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, locale }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
-      if (!res.ok || !data?.ok) {
-        throw new Error(data?.error || "Falha ao inscrever.");
+      if (!res.ok) {
+        throw new Error(data?.message || (isPT ? "Falha ao inscrever." : "Subscription failed."));
       }
 
       setStatus("success");
-      setMessage("Inscrição feita com sucesso ✨ Verifica o teu email.");
+      setMessage(isPT ? "Inscrição feita com sucesso. ✅" : "Subscribed successfully. ✅");
       setEmail("");
-    } catch (error: any) {
+    } catch (err: any) {
       setStatus("error");
-      setMessage(error.message || "Erro ao enviar. Tenta novamente.");
+      setMessage(err?.message || (isPT ? "Erro inesperado." : "Unexpected error."));
     }
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-3 sm:flex-row">
-      <input
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="O teu email"
-        className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm text-black outline-none placeholder:text-black/40 focus:border-black/20 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-white/40 dark:focus:border-white/20"
-      />
+    <form onSubmit={onSubmit} className="flex flex-col gap-3">
+      <label className="text-xs font-semibold tracking-wide text-black/60 dark:text-white/70">
+        {isPT ? "Email" : "Email"}
+      </label>
 
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="rounded-2xl bg-black px-5 py-3 text-xs font-semibold tracking-wide text-white shadow-sm hover:opacity-90 disabled:opacity-60 dark:bg-white dark:text-black"
-      >
-        {status === "loading" ? "A enviar..." : "Inscrever-me"}
-      </button>
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          placeholder={isPT ? "teuemail@gmail.com" : "you@example.com"}
+          className="w-full rounded-2xl border border-black/10 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black/30 dark:border-white/10 dark:bg-white/5 dark:text-white dark:focus:border-white/25"
+        />
 
-      {message && (
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="rounded-2xl bg-black px-5 py-3 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-60"
+        >
+          {status === "loading"
+            ? isPT
+              ? "A inscrever..."
+              : "Subscribing..."
+            : isPT
+            ? "Inscrever-me"
+            : "Subscribe"}
+        </button>
+      </div>
+
+      {message ? (
         <p
           className={`text-xs ${
             status === "success"
-              ? "text-emerald-700 dark:text-emerald-400"
-              : "text-rose-700 dark:text-rose-400"
+              ? "text-emerald-700 dark:text-emerald-300"
+              : "text-rose-700 dark:text-rose-300"
           }`}
         >
           {message}
+        </p>
+      ) : (
+        <p className="text-xs text-black/50 dark:text-white/50">
+          {isPT
+            ? "Sem spam. Podes cancelar quando quiseres."
+            : "No spam. You can unsubscribe anytime."}
         </p>
       )}
     </form>
