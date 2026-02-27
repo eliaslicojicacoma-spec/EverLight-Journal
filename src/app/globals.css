@@ -3,47 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --bg: 246 244 239;        /* #F6F4EF */
-  --fg: 18 18 18;           /* #121212 */
-
-  --card: 255 255 255;      /* white */
-  --cardBorder: 0 0 0;      /* black (usado com opacity) */
-
-  --muted: 107 107 107;     /* #6B6B6B */
-  --accent: 26 42 120;      /* #1A2A78 */
-  --gold: 216 199 140;      /* #D8C78C */
+  --bg: #f6f4ef;            /* fundo principal (creme) */
+  --surface: #fbfaf7;       /* cards / sections (quase branco, mas quente) */
+  --surface2: #f3efe6;      /* variação (para áreas internas) */
+  --text: #121212;
+  --muted: #6b6b6b;
+  --border: rgba(18, 18, 18, 0.10);
 }
 
-html, body {
-  height: 100%;
+.dark {
+  --bg: #0b0b0c;
+  --surface: #111114;
+  --surface2: #0e0e10;
+  --text: #f4f4f5;
+  --muted: rgba(244, 244, 245, 0.70);
+  --border: rgba(255, 255, 255, 0.10);
 }
 
-body {
-  background: rgb(var(--bg));
-  color: rgb(var(--fg));
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+.el-bg {
+  background: var(--bg);
+  color: var(--text);
 }
 
-/* seleção bonita */
-::selection{
-  background: rgba(26, 42, 120, .20);
+.el-surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
 }
 
-/* container padrão */
-.container-xl{
-  @apply mx-auto w-full max-w-6xl px-4;
-}
-
-/* cartão premium reutilizável */
-.card{
-  @apply rounded-[28px] border bg-white shadow-sm;
-  border-color: rgba(0,0,0,.08);
-}
-
-/* blur premium */
-.glass{
-  background: rgba(255,255,255,.55);
-  border: 1px solid rgba(0,0,0,.08);
-  backdrop-filter: blur(10px);
-}
+.el-surface-2 {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+                }
