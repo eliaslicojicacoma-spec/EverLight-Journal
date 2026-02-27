@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 
-export default function SubscribeForm({ locale }: { locale: string }) {
-  const isPT = locale === "pt";
-
+export default function SubscribeForm() {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
-  const [msg, setMsg] = useState<string>("");
+  const [msg, setMsg] = useState("");
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -15,69 +14,62 @@ export default function SubscribeForm({ locale }: { locale: string }) {
     setMsg("");
 
     try {
-      const r = await fetch("/api/newsletter", {
+      const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: email.trim(), name: name.trim() || undefined }),
       });
 
-      const data = (await r.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      const data = await res.json().catch(() => ({}));
 
-      if (!r.ok || !data.ok) {
+      if (!res.ok || !data?.ok) {
         setStatus("error");
-        setMsg(data.error || (isPT ? "Falhou. Tenta novamente." : "Failed. Try again."));
+        setMsg(data?.error ?? "Não deu para inscrever agora.");
         return;
       }
 
       setStatus("ok");
-      setMsg(isPT ? "Feito! Agora estás na lista ✅" : "Done! You're in ✅");
+      setMsg("Inscrição feita. Bem-vindo ao EverLight 🙌");
       setEmail("");
+      setName("");
     } catch {
       setStatus("error");
-      setMsg(isPT ? "Sem conexão. Tenta novamente." : "No connection. Try again.");
+      setMsg("Sem rede ou erro no servidor.");
     }
   }
 
   return (
-    <div className="rounded-[28px] border border-black/10 bg-white p-5 shadow-sm">
-      <h3 className="text-base font-semibold text-[#121212]">
-        {isPT ? "Newsletter EverLight" : "EverLight Newsletter"}
-      </h3>
-      <p className="mt-1 text-sm text-black/60">
-        {isPT
-          ? "1 email por semana: resumo + valor prático. Sem spam."
-          : "1 email/week: summary + practical value. No spam."}
-      </p>
-
-      <form onSubmit={onSubmit} className="mt-4 flex flex-col gap-3 sm:flex-row">
+    <form onSubmit={onSubmit} className="space-y-3">
+      <div className="grid gap-2 sm:grid-cols-2">
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Nome (opcional)"
+          className="h-11 w-full rounded-2xl border border-black/10 bg-white/70 px-4 text-sm outline-none focus:border-black/20 dark:border-white/10 dark:bg-white/5"
+        />
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
           type="email"
-          inputMode="email"
-          autoComplete="email"
-          placeholder={isPT ? "teuemail@exemplo.com" : "you@email.com"}
-          className="h-11 w-full rounded-xl border border-black/10 bg-white px-4 text-sm outline-none ring-0 focus:border-black/20"
           required
+          className="h-11 w-full rounded-2xl border border-black/10 bg-white/70 px-4 text-sm outline-none focus:border-black/20 dark:border-white/10 dark:bg-white/5"
         />
-        <button
-          type="submit"
-          disabled={status === "loading"}
-          className="h-11 rounded-xl bg-[#121212] px-5 text-sm font-semibold text-white shadow-sm disabled:opacity-60"
-        >
-          {status === "loading" ? (isPT ? "A enviar..." : "Sending...") : isPT ? "Assinar" : "Subscribe"}
-        </button>
-      </form>
+      </div>
+
+      <button
+        disabled={status === "loading"}
+        className="inline-flex h-11 items-center justify-center rounded-2xl bg-black px-5 text-xs font-semibold tracking-wide text-white shadow-sm disabled:opacity-60"
+        type="submit"
+      >
+        {status === "loading" ? "A inscrever..." : "Inscrever-me"}
+      </button>
 
       {msg ? (
-        <p
-          className={`mt-3 text-sm ${
-            status === "ok" ? "text-emerald-700" : status === "error" ? "text-red-700" : "text-black/60"
-          }`}
-        >
+        <p className={`text-xs ${status === "error" ? "text-red-600" : "text-black/70 dark:text-white/70"}`}>
           {msg}
         </p>
       ) : null}
-    </div>
+    </form>
   );
 }
