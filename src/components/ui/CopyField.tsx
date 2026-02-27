@@ -11,7 +11,6 @@ export default function CopyField({ label, value }: { label: string; value: stri
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1200);
     } catch {
-      // fallback: seleciona e tenta copiar via execCommand
       const el = document.createElement("textarea");
       el.value = value;
       document.body.appendChild(el);
