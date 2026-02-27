@@ -1,36 +1,27 @@
 import SubscribeForm from "@/components/subscribe/SubscribeForm";
 
-export default function NewsletterCard({ locale }: { locale: string }) {
-  const isPT = locale === "pt";
-
+export default function NewsletterCard() {
   return (
-    <section className="rounded-[28px] border border-black/10 bg-white p-6 shadow-sm">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h2 className="text-lg font-semibold text-[#121212]">
-            {isPT ? "Recebe o melhor do EverLight" : "Get the best of EverLight"}
-          </h2>
-          <p className="mt-1 max-w-xl text-sm leading-relaxed text-black/60">
-            {isPT
-              ? "Uma vez por semana: resumo + contexto + aplicação prática. Sem spam, sem drama."
-              : "Once a week: summary + context + practical steps. No spam, no drama."}
-          </p>
-        </div>
-
-        <span className="inline-flex w-fit items-center rounded-full bg-black/5 px-3 py-1 text-xs font-semibold text-[#121212]">
-          {isPT ? "Newsletter Premium" : "Premium Newsletter"}
-        </span>
+    <div className="card p-6">
+      <div className="text-[11px] tracking-[0.22em] text-black/55 dark:text-white/55">
+        NEWSLETTER
       </div>
+
+      <h3 className="mt-2 text-lg font-semibold text-black dark:text-white">
+        Recebe conteúdo premium no email
+      </h3>
+
+      <p className="mt-2 text-sm leading-relaxed text-black/60 dark:text-white/70">
+        Sem spam. Só resumos, estudos e links oficiais — com aplicação prática.
+      </p>
 
       <div className="mt-4">
-        <SubscribeForm locale={locale} />
+        <SubscribeForm />
       </div>
 
-      <p className="mt-3 text-xs text-black/50">
-        {isPT
-          ? "Ao assinar, concordas em receber emails do EverLight. Podes sair quando quiseres."
-          : "By subscribing, you agree to receive EverLight emails. Unsubscribe anytime."}
+      <p className="mt-3 text-xs text-black/50 dark:text-white/50">
+        Ao inscrever-se, concordas com a Política de Privacidade.
       </p>
-    </section>
+    </div>
   );
 }
