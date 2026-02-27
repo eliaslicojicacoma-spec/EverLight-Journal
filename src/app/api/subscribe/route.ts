@@ -6,55 +6,54 @@ function isValidEmail(email: string) {
 
 export async function POST(req: Request) {
   try {
-    const formData = await req.formData();
-    const email = (formData.get("email") || "").toString().trim();
-    const locale = ((formData.get("locale") || "pt").toString().trim() || "pt") as "pt" | "en";
+    const { email, name } = (await req.json()) as { email?: string; name?: string };
 
     if (!email || !isValidEmail(email)) {
-      return NextResponse.redirect(new URL(`/${locale}/subscribe?status=invalid`, req.url));
+      return NextResponse.json({ ok: false, error: "Email inválido." }, { status: 400 });
     }
 
     const apiKey = process.env.BREVO_API_KEY;
     const listIdRaw = process.env.BREVO_LIST_ID;
 
     if (!apiKey || !listIdRaw) {
-      return NextResponse.redirect(new URL(`/${locale}/subscribe?status=server`, req.url));
+      return NextResponse.json(
+        { ok: false, error: "Variáveis BREVO_* não configuradas no servidor." },
+        { status: 500 }
+      );
     }
 
     const listId = Number(listIdRaw);
     if (!Number.isFinite(listId)) {
-      return NextResponse.redirect(new URL(`/${locale}/subscribe?status=server`, req.url));
+      return NextResponse.json({ ok: false, error: "BREVO_LIST_ID inválido." }, { status: 500 });
     }
 
-    // 1) Criar/atualizar contacto no Brevo
-    const createContactRes = await fetch("https://api.brevo.com/v3/contacts", {
+    // ✅ Brevo: Create contact (com listIds e updateEnabled)
+    const res = await fetch("https://api.brevo.com/v3/contacts", {
       method: "POST",
       headers: {
         "api-key": apiKey,
         "Content-Type": "application/json",
-        Accept: "application/json",
+        "Accept": "application/json",
       },
       body: JSON.stringify({
         email,
         updateEnabled: true,
         listIds: [listId],
-        attributes: {
-          LOCALE: locale.toUpperCase(), // PT / EN
-          SOURCE: "EverLight Subscribe",
-        },
+        attributes: name ? { FNAME: name } : undefined,
       }),
     });
 
-    // Brevo pode responder 201 (created) ou 204/400 em casos específicos.
-    // Se já existir e updateEnabled=true, normalmente fica ok.
-    if (!createContactRes.ok) {
-      // Em alguns casos, Brevo devolve detalhes no json
-      return NextResponse.redirect(new URL(`/${locale}/subscribe?status=error`, req.url));
+    // Brevo pode responder 201 (criou) ou 204/400 dependendo do caso
+    const text = await res.text();
+    if (!res.ok) {
+      return NextResponse.json(
+        { ok: false, error: "Falha ao inscrever. Verifica a API key e List ID.", details: text },
+        { status: 500 }
+      );
     }
 
-    return NextResponse.redirect(new URL(`/${locale}/subscribe?status=ok`, req.url));
+    return NextResponse.json({ ok: true });
   } catch {
-    // fallback
-    return NextResponse.redirect(new URL(`/pt/subscribe?status=error`, req.url));
+    return NextResponse.json({ ok: false, error: "Erro inesperado." }, { status: 500 });
   }
 }
