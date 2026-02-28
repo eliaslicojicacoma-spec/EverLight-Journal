@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 
 type Props = { locale: string };
@@ -9,7 +10,7 @@ function SocialIcon({
 }: {
   href?: string | null;
   label: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   if (!href) return null;
 
@@ -17,6 +18,7 @@ function SocialIcon({
     <a
       href={href}
       aria-label={label}
+      title={label}
       target="_blank"
       rel="noopener noreferrer"
       className="grid h-10 w-10 place-items-center rounded-full border border-black/10 bg-white/60 text-black/70 shadow-sm transition hover:bg-white hover:text-black active:scale-95 dark:border-white/10 dark:bg-white/5 dark:text-white/80 dark:hover:bg-white/10"
@@ -64,10 +66,10 @@ export default function Footer({ locale }: Props) {
   const isPT = locale === "pt";
 
   const t = {
-    title: isPT ? "Voz Global da Fé" : "Global Voice of Faith",
+    title: "EverLight Journal",
     desc: isPT
-      ? "Conectando religião e sociedade de forma equilibrada, bíblica e relevante para os desafios atuais."
-      : "Connecting faith and society in a balanced, biblical and relevant way for today’s challenges.",
+      ? "Conectando fé e sociedade de forma equilibrada, bíblica e relevante para os desafios atuais."
+      : "Connecting faith and society in a balanced, biblical, and relevant way for today’s challenges.",
     quick: isPT ? "Links Rápidos" : "Quick Links",
     resources: isPT ? "Recursos" : "Resources",
     connect: isPT ? "Conecte-se" : "Connect",
@@ -75,8 +77,8 @@ export default function Footer({ locale }: Props) {
     subscribe: isPT ? "Inscrever-se" : "Subscribe",
     blog: "Blog",
     society: isPT ? "Sociedade" : "Society",
-    books: isPT ? "Livros" : "Books",
-    devotionals: isPT ? "Devocionais" : "Devotionals",
+    library: isPT ? "Biblioteca" : "Library",
+    adventist: isPT ? "Adventista" : "Adventist",
     about: isPT ? "Sobre" : "About",
     support: isPT ? "Apoie o Ministério" : "Support the Ministry",
     contact: isPT ? "Contato" : "Contact",
@@ -85,12 +87,11 @@ export default function Footer({ locale }: Props) {
     follow: isPT ? "Siga-nos nas redes sociais" : "Follow us on social media",
   };
 
-  // ✅ teus links reais
   const SOCIAL = {
     facebook: "https://www.facebook.com/share/1L9YyUSD2x/",
     instagram: "https://www.instagram.com/eliascacoma?igsh=bmM3MHg3NXp2Z3h3",
     youtube: "https://youtube.com/@eliaslicojicacoma?si=WX-GbCP0z9kW2vV4",
-    linkedin: null as string | null, // se tiveres, mete aqui o link
+    linkedin: null as string | null,
   };
 
   const homeNewsletter = `/${locale}#newsletter`;
@@ -109,6 +110,7 @@ export default function Footer({ locale }: Props) {
                 +244 933 522 616
               </a>
             </div>
+
             <div className="flex items-center gap-2">
               <span aria-hidden>✉️</span>
               <a className="hover:underline" href="mailto:eliaslicojicacoma@gmail.com">
@@ -121,22 +123,62 @@ export default function Footer({ locale }: Props) {
         <div>
           <h4 className="text-sm font-semibold tracking-wide">{t.quick}</h4>
           <ul className="mt-4 space-y-2 text-sm text-black/70 dark:text-white/70">
-            <li><Link className="hover:underline" href={`/${locale}/blog`}>{t.blog}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/society`}>{t.society}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/library`}>{t.books}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/adventist`}>{t.devotionals}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/about`}>{t.about}</Link></li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/blog`}>
+                {t.blog}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/society`}>
+                {t.society}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/library`}>
+                {t.library}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/adventist`}>
+                {t.adventist}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/about`}>
+                {t.about}
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div>
           <h4 className="text-sm font-semibold tracking-wide">{t.resources}</h4>
           <ul className="mt-4 space-y-2 text-sm text-black/70 dark:text-white/70">
-            <li><Link className="hover:underline" href={`/${locale}/donate`}>{t.support}</Link></li>
-            <li><Link className="hover:underline" href={homeNewsletter}>{t.newsletter}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/contact`}>{t.contact}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/privacy`}>{t.privacy}</Link></li>
-            <li><Link className="hover:underline" href={`/${locale}/terms`}>{t.terms}</Link></li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/donate`}>
+                {t.support}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={homeNewsletter}>
+                {t.newsletter}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/contact`}>
+                {t.contact}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/privacy`}>
+                {t.privacy}
+              </Link>
+            </li>
+            <li>
+              <Link className="hover:underline" href={`/${locale}/terms`}>
+                {t.terms}
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -145,10 +187,18 @@ export default function Footer({ locale }: Props) {
           <p className="mt-4 text-sm text-black/60 dark:text-white/70">{t.follow}</p>
 
           <div className="mt-4 flex items-center gap-3">
-            <SocialIcon href={SOCIAL.facebook} label="Facebook"><IconFacebook /></SocialIcon>
-            <SocialIcon href={SOCIAL.instagram} label="Instagram"><IconInstagram /></SocialIcon>
-            <SocialIcon href={SOCIAL.youtube} label="YouTube"><IconYouTube /></SocialIcon>
-            <SocialIcon href={SOCIAL.linkedin} label="LinkedIn"><IconLinkedIn /></SocialIcon>
+            <SocialIcon href={SOCIAL.facebook} label="Facebook">
+              <IconFacebook />
+            </SocialIcon>
+            <SocialIcon href={SOCIAL.instagram} label="Instagram">
+              <IconInstagram />
+            </SocialIcon>
+            <SocialIcon href={SOCIAL.youtube} label="YouTube">
+              <IconYouTube />
+            </SocialIcon>
+            <SocialIcon href={SOCIAL.linkedin} label="LinkedIn">
+              <IconLinkedIn />
+            </SocialIcon>
           </div>
 
           <Link
@@ -165,4 +215,4 @@ export default function Footer({ locale }: Props) {
       </div>
     </footer>
   );
-                                                                                           }
+}
