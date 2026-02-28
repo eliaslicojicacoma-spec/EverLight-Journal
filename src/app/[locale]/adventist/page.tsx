@@ -7,23 +7,19 @@ export default function AdventistPage({
   params: { locale: string };
 }) {
   const locale = params?.locale ?? "pt";
-  const isPT = locale === "pt";
-
   const cards = getAdventistCards(locale);
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-12">
-      <header className="mb-8">
-        <h1 className="text-3xl font-semibold tracking-tight text-black">
-          {isPT ? "Adventista" : "Adventist"}
-        </h1>
-        <p className="mt-2 max-w-2xl text-sm text-black/60">
-          {isPT
-            ? "Estudos e reflexões fundamentadas na fé Adventista."
-            : "Studies and reflections grounded in Adventist faith."}
+    <main className="space-y-10">
+      {/* Header */}
+      <section className="rounded-3xl border border-black/10 bg-white p-6 shadow-sm">
+        <h1 className="text-3xl font-bold text-black">Adventista</h1>
+        <p className="mt-2 text-sm text-black/60">
+          Estudos e reflexões fundamentadas na fé Adventista.
         </p>
-      </header>
+      </section>
 
+      {/* Cards */}
       <section className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {cards.map((card) => (
           <ArticleCard
@@ -33,7 +29,7 @@ export default function AdventistPage({
             summary={card.summary}
             context={card.context}
             actions={card.actions}
-            href={`/${locale}/adventist/${card.slug}`}
+            href={`/${locale}/adventist/${card.slug}`}   {/* 👈 AQUI está o segredo */}
           />
         ))}
       </section>
