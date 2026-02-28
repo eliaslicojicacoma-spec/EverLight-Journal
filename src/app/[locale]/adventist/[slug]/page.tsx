@@ -23,7 +23,7 @@ export default function AdventistArticlePage({
         href={`/${locale}/adventist`}
         className="inline-flex items-center gap-2 text-sm font-semibold text-black/70 hover:text-black"
       >
-        ← {isPT ? "Voltar para Adventist" : "Back to Adventist"}
+        ← {isPT ? "Voltar para Adventista" : "Back to Adventist"}
       </Link>
 
       <header className="mt-6 rounded-3xl border border-black/10 bg-white p-6 shadow-sm">
@@ -63,27 +63,7 @@ export default function AdventistArticlePage({
             ))}
           </ul>
         </div>
-
-        <div className="rounded-2xl border border-black/10 bg-black/[0.02] p-4">
-          <p className="text-sm text-black/70">
-            {isPT
-              ? "Em breve: estudo completo com base bíblica e leitura expandida."
-              : "Coming soon: full study with biblical basis and expanded reading."}
-          </p>
-        </div>
       </section>
     </main>
   );
 }
-
-export function generateStaticParams() {
-  const locales = ["pt", "en"];
-  const out: { locale: string; slug: string }[] = [];
-
-  for (const locale of locales) {
-    const cards = getAdventistCards(locale);
-    for (const c of cards) out.push({ locale, slug: c.slug });
-  }
-
-  return out;
-                  }
