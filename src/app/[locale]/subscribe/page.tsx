@@ -1,94 +1,111 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
 export default function SubscribePage({
   params,
-  searchParams,
 }: {
   params: { locale: string };
-  searchParams?: { status?: string };
 }) {
   const locale = params?.locale ?? "pt";
   const isPT = locale === "pt";
-  const status = searchParams?.status;
 
-  const msg =
-    status === "ok"
-      ? isPT
-        ? "✅ Inscrição confirmada! Verifica o teu e-mail (e a caixa de spam só por garantia)."
-        : "✅ Subscribed! Check your email (and spam folder just in case)."
-      : status === "invalid"
-      ? isPT
-        ? "⚠️ Email inválido. Confirma e tenta novamente."
-        : "⚠️ Invalid email. Please try again."
-      : status === "server"
-      ? isPT
-        ? "⚠️ Configuração do servidor incompleta. Falta BREVO_API_KEY ou BREVO_LIST_ID."
-        : "⚠️ Server not configured. Missing BREVO_API_KEY or BREVO_LIST_ID."
-      : status === "error"
-      ? isPT
-        ? "⚠️ Não foi possível concluir. Tenta novamente em alguns segundos."
-        : "⚠️ Something went wrong. Please try again."
-      : null;
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">(
+    "idle"
+  );
+  const [msg, setMsg] = useState("");
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("loading");
+    setMsg("");
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) throw new Error(data?.message || "Falha ao inscrever.");
+
+      setStatus("ok");
+      setMsg(isPT ? "Inscrito com sucesso ✅" : "Subscribed successfully ✅");
+      setEmail("");
+    } catch (err: any) {
+      setStatus("error");
+      setMsg(err?.message || "Erro interno no servidor.");
+    }
+  }
 
   return (
-    <main className="space-y-10">
-      <section className="rounded-[28px] border border-black/10 bg-white p-6 sm:p-10">
-        <div className="max-w-3xl">
-          <div className="text-[11px] tracking-[0.22em] text-black/55">
-            {isPT ? "NEWSLETTER OFICIAL" : "OFFICIAL NEWSLETTER"}
-          </div>
+    <main className="mx-auto w-full max-w-xl px-4 py-10">
+      <h1 className="text-4xl font-semibold tracking-tight text-black">
+        {isPT ? "diário + Newsletter semanal" : "daily + Weekly Newsletter"}
+      </h1>
 
-          <h1 className="mt-4 text-4xl font-semibold sm:text-5xl">
-            {isPT ? "Devocional diário + Newsletter semanal" : "Daily devotional + Weekly newsletter"}
-          </h1>
+      <p className="mt-4 text-sm leading-relaxed text-black/60">
+        {isPT
+          ? "Todos os dias: uma reflexão curta e prática. Toda semana: um resumo editorial com artigos fortes (fé + sociedade). Sem spam."
+          : "Daily: short practical reflection. Weekly: editorial summary with strong articles. No spam."}
+      </p>
 
-          <p className="mt-5 text-sm leading-relaxed text-black/60 sm:text-base">
-            {isPT
-              ? "Todos os dias: uma reflexão curta e prática. Toda semana: um resumo editorial com artigos fortes (fé + sociedade). Sem spam."
-              : "Daily: a short, practical devotional. Weekly: an editorial digest with strong articles (faith + society). No spam."}
+      <form
+        onSubmit={onSubmit}
+        className="mt-8 rounded-3xl border border-black/10 bg-white p-6 shadow-sm"
+      >
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          required
+          placeholder={isPT ? "seuemail@gmail.com" : "yourmail@gmail.com"}
+          className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm outline-none focus:border-black/20"
+        />
+
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="mt-4 w-full rounded-2xl bg-black px-5 py-4 text-sm font-semibold text-white shadow-sm disabled:opacity-60"
+        >
+          {status === "loading"
+            ? isPT
+              ? "A inscrever..."
+              : "Subscribing..."
+            : isPT
+            ? "Inscrever-se"
+            : "Subscribe"}
+        </button>
+
+        {msg ? (
+          <p
+            className={`mt-4 text-sm ${
+              status === "error" ? "text-red-600" : "text-black/70"
+            }`}
+          >
+            {msg}
           </p>
+        ) : null}
 
-          {msg ? (
-            <div className="mt-6 rounded-2xl border border-black/10 bg-black/5 px-4 py-3 text-sm text-black/80">
-              {msg}
-            </div>
-          ) : null}
+        <p className="mt-4 text-xs text-black/50">
+          {isPT
+            ? "Respeitamos sua privacidade. Cancele quando quiser."
+            : "We respect your privacy. Unsubscribe anytime."}
+        </p>
 
-          <form action="/api/subscribe" method="POST" className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <input type="hidden" name="locale" value={locale} />
-
-            <input
-              type="email"
-              name="email"
-              required
-              placeholder={isPT ? "Seu melhor e-mail" : "Your best email"}
-              className="w-full rounded-2xl border border-black/15 px-5 py-3 text-sm outline-none focus:border-black"
-            />
-
-            <button
-              type="submit"
-              className="rounded-2xl bg-black px-6 py-3 text-xs font-semibold tracking-wide text-white hover:opacity-90"
-            >
-              {isPT ? "Inscrever-se" : "Subscribe"}
-            </button>
-          </form>
-
-          <p className="mt-4 text-xs text-black/45">
-            {isPT
-              ? "Respeitamos sua privacidade. Cancele quando quiser."
-              : "We respect your privacy. Unsubscribe anytime."}
-          </p>
-
-          <div className="mt-6">
-            <Link
-              href={`/${locale}`}
-              className="text-xs font-semibold underline decoration-black/20 underline-offset-4 hover:decoration-black/60"
-            >
-              {isPT ? "← Voltar ao site" : "← Back to site"}
-            </Link>
-          </div>
+        <div className="mt-6">
+          <Link
+            className="text-sm font-semibold text-black underline decoration-black/20 underline-offset-4"
+            href={`/${locale}`}
+          >
+            ← {isPT ? "Voltar ao site" : "Back to site"}
+          </Link>
         </div>
-      </section>
+      </form>
     </main>
   );
-}
+        }
