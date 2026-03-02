@@ -1,62 +1,37 @@
 export type BlogArticle = {
-  locale: "pt" | "en";
   slug: string;
-  category: string;
   title: string;
-  summary: string;
-  date: string;
-  readTime: string;
-  image?: string;
-  tags?: string[];
+  excerpt: string;
   content: string;
+  date: string;
+  category: string;
 };
 
-const ARTICLES: BlogArticle[] = [
+export const articles: BlogArticle[] = [
   {
-    locale: "pt",
-    slug: "familia-fe-e-habitos-simples-que-protegem-o-lar",
-    category: "Adventist",
-    title: "Família, Fé e Hábitos Simples que Protegem o Lar",
-    summary:
-      "Pequenas rotinas espirituais criam uma casa mais segura emocionalmente e mais forte em Deus.",
-    date: "2026-02-28",
-    readTime: "1 min",
-    image: "/images/blog/default.jpg",
-    tags: ["familia", "habitos", "vida-espiritual"],
+    slug: "o-poder-da-fe",
+    title: "O Poder da Fé na Sociedade Moderna",
+    excerpt:
+      "Como a fé bíblica continua relevante no mundo contemporâneo.",
     content:
-      "<p>Conteúdo do artigo aqui. Substitui por teu texto completo.</p>",
-  },
-  {
-    locale: "en",
-    slug: "family-faith-and-simple-habits-that-protect-the-home",
-    category: "Adventist",
-    title: "Family, Faith and Simple Habits that Protect the Home",
-    summary:
-      "Small spiritual routines build a safer home emotionally and stronger in God.",
-    date: "2026-02-28",
-    readTime: "1 min",
-    image: "/images/blog/default.jpg",
-    tags: ["family", "habits", "spiritual-life"],
-    content: "<p>English article content here.</p>",
+      "A fé sempre foi um elemento central na transformação social...",
+    date: "2026-03-02",
+    category: "espiritualidade",
   },
 ];
 
-export function getBlogArticles(locale: string) {
-  return ARTICLES.filter((a) => a.locale === (locale === "en" ? "en" : "pt")).sort(
-    (a, b) => (a.date < b.date ? 1 : -1)
-  );
+export function getBlogArticles() {
+  return articles;
 }
 
-export function getBlogArticle(locale: string, slug: string) {
-  const loc = locale === "en" ? "en" : "pt";
-  return ARTICLES.find((a) => a.locale === loc && a.slug === slug) ?? null;
+export function getBlogArticle(slug: string) {
+  return articles.find((article) => article.slug === slug);
 }
 
-export function getBlogSlugs(locale: string) {
-  return getBlogArticles(locale).map((a) => a.slug);
+export function getBlogSlugs() {
+  return articles.map((article) => article.slug);
 }
 
-export function getBlogCategories(locale: string) {
-  const items = getBlogArticles(locale).map((a) => a.category.trim());
-  return Array.from(new Set(items)).sort((a, b) => a.localeCompare(b));
+export function getBlogCategories() {
+  return [...new Set(articles.map((article) => article.category))];
 }
