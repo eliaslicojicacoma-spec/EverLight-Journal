@@ -1,49 +1,65 @@
-import type { Article } from "@/types/Article";
-import type { Locale } from "@/config/siteConfig";
+export type BlogArticle = {
+  slug: string;
+  locale: "pt" | "en";
+  title: string;
+  excerpt: string;
+  content: string; // (por agora, string simples; depois trocamos para MDX)
+  category: string;
+  tags?: string[];
+  publishedAt: string; // ISO date
+  updatedAt?: string;  // ISO date
+  readingTime?: number;
+  coverImage?: string;
+};
 
-const ARTICLES: Article[] = [
+const articles: BlogArticle[] = [
   {
     slug: "bem-vindo-ao-everlight",
     locale: "pt",
     title: "Bem-vindo ao EverLight Journal",
-    excerpt:
-      "A base do projeto está pronta: PT/EN, blog por ficheiro, SEO e estrutura escalável.",
+    excerpt: "O que é o EverLight, por que existe, e como vais usá-lo no dia a dia.",
     content:
-      "## Olá!\n\nEste é o primeiro artigo do EverLight Journal.\n\n- PT/EN\n- Blog por `articles.ts`\n- Estrutura profissional\n",
-    date: "2026-03-02",
-    categories: ["Início", "Projeto"],
-    author: "Elias Licoji Cacoma",
+      "Este é o teu primeiro artigo. Em seguida vamos ligar isto a páginas de artigo, categoria e SEO.",
+    category: "Sociedade e Fé",
+    tags: ["everlight", "introdução"],
+    publishedAt: "2026-03-03",
+    updatedAt: "2026-03-03",
+    readingTime: 3,
   },
   {
     slug: "welcome-to-everlight",
     locale: "en",
     title: "Welcome to EverLight Journal",
-    excerpt:
-      "The foundation is ready: PT/EN, file-based blog source, SEO and scalable structure.",
+    excerpt: "What EverLight is, why it exists, and how you’ll use it daily.",
     content:
-      "## Hello!\n\nThis is the first EverLight Journal article.\n\n- PT/EN\n- Blog via `articles.ts`\n- Pro structure\n",
-    date: "2026-03-02",
-    categories: ["Start", "Project"],
-    author: "Elias Licoji Cacoma",
+      "This is your first EN article. Next we’ll wire this to post pages, category pages, and SEO.",
+    category: "Society & Faith",
+    tags: ["everlight", "intro"],
+    publishedAt: "2026-03-03",
+    updatedAt: "2026-03-03",
+    readingTime: 3,
   },
 ];
 
-export function getBlogArticles(locale?: Locale) {
-  const list = locale ? ARTICLES.filter(a => a.locale === locale) : ARTICLES;
-  return [...list].sort((a, b) => (a.date < b.date ? 1 : -1));
+export function getBlogArticles(locale?: "pt" | "en") {
+  const list = locale ? articles.filter(a => a.locale === locale) : [...articles];
+  return list.sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
 }
 
-export function getBlogArticle(slug: string, locale?: Locale) {
-  const list = getBlogArticles(locale);
-  return list.find(a => a.slug === slug) || null;
-}
-
-export function getBlogSlugs(locale?: Locale) {
+export function getBlogSlugs(locale?: "pt" | "en") {
   return getBlogArticles(locale).map(a => a.slug);
 }
 
-export function getBlogCategories(locale?: Locale) {
-  const set = new Set<string>();
-  getBlogArticles(locale).forEach(a => a.categories.forEach(c => set.add(c)));
-  return Array.from(set).sort((a, b) => a.localeCompare(b));
+export function getBlogArticle(slug: string, locale?: "pt" | "en") {
+  const list = getBlogArticles(locale);
+  return list.find(a => a.slug === slug) ?? null;
+}
+
+export function getBlogCategories(locale?: "pt" | "en") {
+  const list = getBlogArticles(locale);
+  const map = new Map<string, number>();
+  for (const a of list) map.set(a.category, (map.get(a.category) ?? 0) + 1);
+  return Array.from(map.entries())
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count);
 }
