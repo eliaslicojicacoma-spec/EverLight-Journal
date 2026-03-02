@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/siteConfig";
 import { getBlogArticles, getBlogCategories } from "@/content/blog/articles";
+import ArticleCard from "@/components/blog/ArticleCard";
 
 type PageProps = {
   params: { locale: string; category: string };
 };
 
 export function generateStaticParams() {
-  const locales = ["pt", "en"];
+  const locales = siteConfig.locales;
   const items: { locale: string; category: string }[] = [];
 
   for (const locale of locales) {
@@ -19,9 +20,8 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: PageProps) {
-  const locale = params?.locale ?? "pt";
+  const locale = params?.locale === "en" ? "en" : "pt";
   const category = decodeURIComponent(params?.category ?? "");
-
   const base = siteConfig.url;
   const url = `${base}/${locale}/blog/category/${encodeURIComponent(category)}`;
 
@@ -32,8 +32,8 @@ export function generateMetadata({ params }: PageProps) {
 
   const description =
     locale === "pt"
-      ? `Artigos do EverLight Journal na categoria “${category}”.`
-      : `EverLight Journal articles in the “${category}” category.`;
+      ? `Artigos do EverLight Journal na categoria "${category}".`
+      : `EverLight Journal articles in the "${category}" category.`;
 
   return {
     title,
@@ -44,78 +44,70 @@ export function generateMetadata({ params }: PageProps) {
 }
 
 export default function CategoryPage({ params }: PageProps) {
-  const locale = params?.locale ?? "pt";
-  const isPT = locale === "pt";
+  const locale = params?.locale === "en" ? "en" : "pt";
   const category = decodeURIComponent(params?.category ?? "");
 
   const articles = getBlogArticles(locale).filter(
     (a) => a.category.toLowerCase() === category.toLowerCase()
   );
 
+  const isPT = locale === "pt";
+
   return (
     <main className="space-y-10">
-      <section className="rounded-[28px] border border-black/10 bg-white p-6 shadow-sm sm:p-10">
-        <div className="text-[11px] font-semibold tracking-[0.22em] text-black/55">
-          {isPT ? "BLOG • CATEGORIA" : "BLOG • CATEGORY"}
+      <section className="rounded-[28px] border border-black/10 bg-white p-6 shadow-sm">
+        <div className="text-[11px] font-semibold tracking-[0.22em] text-black/60">
+          {isPT ? "BLOG · CATEGORIA" : "BLOG · CATEGORY"}
         </div>
 
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-black sm:text-5xl">
+        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-black">
           {category}
         </h1>
 
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-black/60">
           {isPT
-            ? "Artigos selecionados com foco em clareza, Bíblia e aplicação prática."
-            : "Curated articles with clarity, Bible grounding, and practical application."}
+            ? "Explora artigos relacionados com esta categoria."
+            : "Explore articles related to this category."}
         </p>
 
-        <div className="mt-6">
+        <div className="mt-5">
           <Link
             href={`/${locale}/blog`}
-            className="inline-flex items-center rounded-2xl border border-black/10 bg-white px-5 py-2.5 text-xs font-semibold text-black shadow-sm transition hover:bg-black/5"
+            className="inline-flex items-center gap-2 text-sm font-bold text-black underline decoration-black/30 underline-offset-4 hover:decoration-black/70"
           >
-            {isPT ? "← Voltar ao Blog" : "← Back to Blog"}
+            {isPT ? "Voltar ao Blog" : "Back to Blog"}
+            <span>→</span>
           </Link>
         </div>
       </section>
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {articles.map((a) => (
-          <article
-            key={a.slug}
-            className="flex flex-col rounded-[28px] border border-black/10 bg-white p-6 shadow-sm transition hover:shadow-md"
-          >
-            <div className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40">
-              {a.category}
-            </div>
-
-            <h2 className="mt-2 text-2xl font-bold leading-tight text-black">
-              {a.title}
-            </h2>
-
-            <p className="mt-4 border-l-2 border-black pl-4 text-base italic leading-relaxed text-black/70">
-              {a.excerpt}
-            </p>
-
-            <div className="mt-auto pt-6">
-              <Link
-                href={`/${locale}/blog/${a.slug}`}
-                className="inline-flex items-center border-b-2 border-black pb-1 text-sm font-bold transition hover:border-black/50 hover:text-black/60"
-              >
-                {isPT ? "Ler" : "Read"} <span className="ml-2">→</span>
-              </Link>
-            </div>
-          </article>
-        ))}
-      </section>
-
-      {articles.length === 0 && (
-        <section className="rounded-[28px] border border-black/10 bg-white p-8 text-center text-black/70 shadow-sm">
-          {isPT
-            ? "Ainda não há artigos nesta categoria."
-            : "There are no articles in this category yet."}
+      {articles.length === 0 ? (
+        <section className="rounded-[28px] border border-black/10 bg-white p-6 shadow-sm">
+          <p className="text-sm text-black/60">
+            {isPT
+              ? "Ainda não há artigos nesta categoria."
+              : "There are no articles in this category yet."}
+          </p>
+        </section>
+      ) : (
+        <section className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {articles.map((a) => (
+            <ArticleCard
+              key={a.slug}
+              category={a.category}
+              title={a.title}
+              summary={a.summary}
+              context={a.excerpt}
+              actions={[
+                isPT ? "Ler o artigo completo" : "Read the full article",
+                isPT ? "Anotar 3 ideias" : "Write 3 takeaways",
+                isPT ? "Orar e aplicar" : "Pray and apply",
+              ]}
+              href={`/${locale}/blog/${a.slug}`}
+            />
+          ))}
         </section>
       )}
     </main>
   );
-                }
+          }
