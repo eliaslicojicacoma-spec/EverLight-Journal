@@ -1,31 +1,31 @@
+import "@/styles/globals.css";
 import type { ReactNode } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { siteConfig, type SiteLocale } from "@/config/siteConfig";
+
+export const dynamic = "force-static";
+
+export function generateStaticParams() {
+  return siteConfig.i18n.locales.map((locale) => ({ locale }));
+}
 
 export default function LocaleLayout({
   children,
   params,
 }: {
   children: ReactNode;
-  params: { locale: string };
+  params: { locale: SiteLocale };
 }) {
-  const locale = params?.locale ?? "pt";
+  const locale = params?.locale ?? siteConfig.i18n.defaultLocale;
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className="el-bg min-h-screen">
-        <div className="pointer-events-none fixed inset-0 -z-10">
-          <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-amber-200/35 blur-3xl dark:bg-amber-500/10" />
-          <div className="absolute top-40 -right-24 h-72 w-72 rounded-full bg-sky-200/35 blur-3xl dark:bg-sky-500/10" />
-          <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-rose-200/20 blur-3xl dark:bg-rose-500/10" />
-        </div>
-
+    <html lang={locale}>
+      <body className="min-h-screen antialiased">
         <Header locale={locale} />
-
-        <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:py-10">
+        <main className="mx-auto w-full max-w-6xl px-4 sm:px-6 py-10">
           {children}
         </main>
-
         <Footer locale={locale} />
       </body>
     </html>
