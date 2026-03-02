@@ -1,33 +1,31 @@
-import "@/styles/globals.css";
-import type { ReactNode } from "react";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import { siteConfig, type SiteLocale } from "@/config/siteConfig";
+import type { Metadata } from "next";
+import { siteConfig } from "@/config/siteConfig";
 
-export const dynamic = "force-static";
-
-export function generateStaticParams() {
-  return siteConfig.i18n.locales.map((locale) => ({ locale }));
-}
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    template: `%s — ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  openGraph: {
+    type: "website",
+    siteName: siteConfig.name,
+    url: siteConfig.url,
+    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    description: siteConfig.description,
+  },
+};
 
 export default function LocaleLayout({
   children,
-  params,
 }: {
-  children: ReactNode;
-  params: { locale: SiteLocale };
+  children: React.ReactNode;
 }) {
-  const locale = params?.locale ?? siteConfig.i18n.defaultLocale;
-
-  return (
-    <html lang={locale}>
-      <body className="min-h-screen antialiased">
-        <Header locale={locale} />
-        <main className="mx-auto w-full max-w-6xl px-4 sm:px-6 py-10">
-          {children}
-        </main>
-        <Footer locale={locale} />
-      </body>
-    </html>
-  );
+  return children;
 }
