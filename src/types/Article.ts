@@ -1,15 +1,13 @@
-export type ArticleCategory = "blog" | "society" | "adventist";
+import type { Locale } from "@/config/siteConfig";
 
 export type Article = {
   slug: string;
-  category: ArticleCategory;
+  locale: Locale;
   title: string;
-  summary: string;
-  context: string;
-  actions: string[];
-  tags: string[];
-  dateISO: string;
-  readTime: string;
-  coverImage?: string;
-  content: string;
+  excerpt: string;
+  content: string; // markdown/plain
+  date: string; // ISO
+  categories: string[];
+  cover?: string;
+  author?: string;
 };

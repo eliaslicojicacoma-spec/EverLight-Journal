@@ -1,31 +1,34 @@
+import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { siteConfig } from "@/config/siteConfig";
+import { siteConfig, type Locale } from "@/config/siteConfig";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
-    template: `%s — ${siteConfig.name}`,
-  },
+  title: siteConfig.name,
   description: siteConfig.description,
-  openGraph: {
-    type: "website",
-    siteName: siteConfig.name,
-    url: siteConfig.url,
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
-    description: siteConfig.description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
-    description: siteConfig.description,
-  },
 };
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
-  return children;
+  const { locale } = await params;
+
+  // Guard simples (evita locale inválido)
+  const isValid = (siteConfig.locales as readonly string[]).includes(locale);
+  const safeLocale = (isValid ? locale : siteConfig.defaultLocale) as Locale;
+
+  return (
+    <html lang={safeLocale}>
+      <body className="bg-zinc-950 text-white">
+        <Header locale={safeLocale} />
+        {children}
+        <Footer />
+      </body>
+    </html>
+  );
 }
