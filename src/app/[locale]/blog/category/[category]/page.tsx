@@ -118,4 +118,4 @@ export default function CategoryPage({ params }: PageProps) {
       )}
     </main>
   );
-}
+                }
