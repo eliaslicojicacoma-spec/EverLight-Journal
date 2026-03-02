@@ -1,31 +1,43 @@
-import Container from "@/components/layout/Container";
+import Link from "next/link";
 import { getBlogArticle } from "@/content/blog/articles";
-import { type Locale } from "@/config/siteConfig";
-import { notFound } from "next/navigation";
 
-export default async function BlogArticlePage({
+export default function BlogPost({
   params,
 }: {
-  params: Promise<{ locale: string; slug: string }>;
+  params: { locale: string; slug: string };
 }) {
-  const { locale, slug } = await params;
-  const article = getBlogArticle(slug, locale as Locale);
+  const locale = (params.locale === "en" ? "en" : "pt") as "pt" | "en";
+  const post = getBlogArticle(params.slug, locale);
 
-  if (!article) return notFound();
+  if (!post) {
+    return (
+      <main className="mx-auto max-w-3xl px-4 py-10">
+        <h1 className="text-2xl font-semibold">404</h1>
+        <p className="mt-2 text-white/70">
+          {locale === "pt" ? "Artigo não encontrado." : "Post not found."}
+        </p>
+        <Link className="mt-6 inline-block underline" href={`/${locale}/blog`}>
+          {locale === "pt" ? "Voltar ao blog" : "Back to blog"}
+        </Link>
+      </main>
+    );
+  }
 
   return (
-    <main className="py-10">
-      <Container>
-        <div className="text-xs text-white/60">{new Date(article.date).toLocaleDateString()}</div>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">{article.title}</h1>
-        <p className="mt-2 text-white/60">{article.excerpt}</p>
+    <main className="mx-auto max-w-3xl px-4 py-10">
+      <Link className="text-sm underline text-white/70" href={`/${locale}/blog`}>
+        {locale === "pt" ? "← Voltar" : "← Back"}
+      </Link>
 
-        <article className="prose prose-invert mt-8 max-w-none">
-          <pre className="whitespace-pre-wrap rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-white/80">
-{article.content}
-          </pre>
-        </article>
-      </Container>
+      <h1 className="mt-4 text-3xl font-semibold">{post.title}</h1>
+      <div className="mt-2 text-sm text-white/60">
+        {post.publishedAt} • {post.category}
+        {post.readingTime ? ` • ${post.readingTime} min` : ""}
+      </div>
+
+      <article className="prose prose-invert mt-8 max-w-none">
+        <p>{post.content}</p>
+      </article>
     </main>
   );
 }
