@@ -1,66 +1,90 @@
 import Link from "next/link";
-import Container from "@/components/layout/Container";
-import { siteConfig, type SiteLocale } from "@/config/siteConfig";
+import { contactConfig } from "@/config/contactConfig";
+import { siteConfig } from "@/config/siteConfig";
+import SocialLinks from "@/components/social/SocialLinks";
+import DonationBox from "@/components/monetization/DonationBox";
 
-export default function Footer({ locale }: { locale: SiteLocale }) {
+type Props = {
+  locale?: string;
+};
+
+export default function Footer({ locale = "pt" }: Props) {
+  const isPT = locale === "pt";
+
   return (
-    <footer className="mt-16 border-t border-black/10 bg-[#F6F4EF]">
-      <Container>
-        <div className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="mt-14 border-t border-black/10">
+      <div className="mx-auto max-w-7xl px-4 py-12">
+        <div className="grid gap-10 md:grid-cols-4">
+          <div className="md:col-span-2">
+            <div className="text-base font-semibold text-black">{siteConfig.name}</div>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-black/60">
+              {siteConfig.description}
+            </p>
+
+            <div className="mt-5 space-y-2 text-sm text-black/70">
+              <div>{contactConfig.phone}</div>
+              <div>{contactConfig.email}</div>
+            </div>
+
+            <SocialLinks className="mt-5" />
+          </div>
+
           <div>
-            <div className="text-base font-semibold">{siteConfig.name}</div>
-            <p className="mt-3 text-sm leading-relaxed text-black/60">{siteConfig.description}</p>
-            <div className="mt-5 space-y-2 text-sm text-black/60">
-              <div>{siteConfig.contact.phone}</div>
-              <div>{siteConfig.contact.email}</div>
+            <div className="text-sm font-semibold text-black">
+              {isPT ? "Links Rápidos" : "Quick Links"}
+            </div>
+            <div className="mt-4 flex flex-col gap-2 text-sm text-black/70">
+              <Link className="hover:text-black" href={`/${locale}/blog`}>
+                Blog
+              </Link>
+              <Link className="hover:text-black" href={`/${locale}/society`}>
+                {isPT ? "Sociedade" : "Society"}
+              </Link>
+              <Link className="hover:text-black" href={`/${locale}/library`}>
+                {isPT ? "Biblioteca" : "Library"}
+              </Link>
+              <Link className="hover:text-black" href={`/${locale}/adventist`}>
+                {isPT ? "Adventista" : "Adventist"}
+              </Link>
+              <Link className="hover:text-black" href={`/${locale}/about`}>
+                {isPT ? "Sobre" : "About"}
+              </Link>
             </div>
           </div>
 
           <div>
-            <div className="text-sm font-semibold">Links Rápidos</div>
-            <div className="mt-4 space-y-2 text-sm text-black/60">
-              <Link className="block hover:text-black" href={`/${locale}/blog`}>Blog</Link>
-              <Link className="block hover:text-black" href={`/${locale}/society`}>Sociedade</Link>
-              <Link className="block hover:text-black" href={`/${locale}/library`}>Biblioteca</Link>
-              <Link className="block hover:text-black" href={`/${locale}/adventist`}>Adventista</Link>
-              <Link className="block hover:text-black" href={`/${locale}/about`}>Sobre</Link>
+            <div className="text-sm font-semibold text-black">
+              {isPT ? "Recursos" : "Resources"}
             </div>
-          </div>
 
-          <div>
-            <div className="text-sm font-semibold">Recursos</div>
-            <div className="mt-4 space-y-2 text-sm text-black/60">
-              <Link className="block hover:text-black" href={`/${locale}/support`}>Apoie o Ministério</Link>
-              <Link className="block hover:text-black" href={`/${locale}/subscribe`}>Newsletter</Link>
-              <Link className="block hover:text-black" href={`/${locale}/contact`}>Contato</Link>
-              <Link className="block hover:text-black" href={`/${locale}/privacy`}>Política de Privacidade</Link>
-              <Link className="block hover:text-black" href={`/${locale}/terms`}>Termos de Uso</Link>
-            </div>
-          </div>
-
-          <div>
-            <div className="text-sm font-semibold">Conecte-se</div>
-            <p className="mt-4 text-sm text-black/60">Siga-nos nas redes sociais</p>
-            <div className="mt-4 flex items-center gap-3">
-              <a className="rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black/70 hover:text-black" href={siteConfig.social.facebook} target="_blank" rel="noreferrer">Facebook</a>
-              <a className="rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black/70 hover:text-black" href={siteConfig.social.instagram} target="_blank" rel="noreferrer">Instagram</a>
-              <a className="rounded-full border border-black/10 bg-white px-4 py-2 text-sm font-semibold text-black/70 hover:text-black" href={siteConfig.social.youtube} target="_blank" rel="noreferrer">YouTube</a>
-            </div>
-            <div className="mt-6">
-              <Link
-                href={`/${locale}/subscribe`}
-                className="inline-flex w-full items-center justify-center rounded-2xl bg-black px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
-              >
-                Inscrever-se
+            <div className="mt-4 flex flex-col gap-2 text-sm text-black/70">
+              <Link className="hover:text-black" href={`/${locale}/support`}>
+                {isPT ? "Apoie o Ministério" : "Support"}
+              </Link>
+              <Link className="hover:text-black" href={`/${locale}/subscribe`}>
+                Newsletter
+              </Link>
+              <Link className="hover:text-black" href={`/${locale}/contact`}>
+                {isPT ? "Contato" : "Contact"}
+              </Link>
+              <Link className="hover:text-black" href={`/${locale}/privacy`}>
+                {isPT ? "Política de Privacidade" : "Privacy"}
+              </Link>
+              <Link className="hover:text-black" href={`/${locale}/terms`}>
+                {isPT ? "Termos de Uso" : "Terms"}
               </Link>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-black/10 py-6 text-sm text-black/50">
+        <div className="mt-10">
+          <DonationBox locale={locale} />
+        </div>
+
+        <div className="mt-10 border-t border-black/10 pt-6 text-xs text-black/50">
           © {new Date().getFullYear()} {siteConfig.name} — {siteConfig.tagline}
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }
