@@ -1,16 +1,13 @@
-export type BlogLocale = "pt" | "en";
-
 export type BlogArticle = {
-  locale: BlogLocale;
+  locale: "pt" | "en";
   slug: string;
   category: string;
   title: string;
   summary: string;
-  excerpt: string;
   date: string;
   readTime: string;
-  tags: string[];
-  coverImage: string;
+  image?: string;
+  tags?: string[];
   content: string;
 };
 
@@ -18,45 +15,48 @@ const ARTICLES: BlogArticle[] = [
   {
     locale: "pt",
     slug: "familia-fe-e-habitos-simples-que-protegem-o-lar",
-    category: "Adventista",
+    category: "Adventist",
     title: "Família, Fé e Hábitos Simples que Protegem o Lar",
     summary:
-      "Pequenas rotinas espirituais criam uma casa mais segura emocionalmente.",
-    excerpt:
-      "Quando a fé vira rotina saudável, o lar ganha estabilidade e direção.",
+      "Pequenas rotinas espirituais criam uma casa mais segura emocionalmente e mais forte em Deus.",
     date: "2026-02-28",
-    readTime: "4 min",
-    tags: ["familia", "habitos"],
-    coverImage: "/images/blog/default.jpg",
-    content: `
-## Introdução
-A fé prática fortalece o lar.
-
-## Ação
-- Culto familiar
-- Planeamento do sábado
-`,
+    readTime: "1 min",
+    image: "/images/blog/default.jpg",
+    tags: ["familia", "habitos", "vida-espiritual"],
+    content:
+      "<p>Conteúdo do artigo aqui. Substitui por teu texto completo.</p>",
+  },
+  {
+    locale: "en",
+    slug: "family-faith-and-simple-habits-that-protect-the-home",
+    category: "Adventist",
+    title: "Family, Faith and Simple Habits that Protect the Home",
+    summary:
+      "Small spiritual routines build a safer home emotionally and stronger in God.",
+    date: "2026-02-28",
+    readTime: "1 min",
+    image: "/images/blog/default.jpg",
+    tags: ["family", "habits", "spiritual-life"],
+    content: "<p>English article content here.</p>",
   },
 ];
 
-export function getBlogArticles(locale: BlogLocale): BlogArticle[] {
-  return ARTICLES.filter((a) => a.locale === locale);
-}
-
-export function getBlogArticle(
-  locale: BlogLocale,
-  slug: string
-): BlogArticle | null {
-  return (
-    ARTICLES.find((a) => a.locale === locale && a.slug === slug) ?? null
+export function getBlogArticles(locale: string) {
+  return ARTICLES.filter((a) => a.locale === (locale === "en" ? "en" : "pt")).sort(
+    (a, b) => (a.date < b.date ? 1 : -1)
   );
 }
 
-export function getBlogSlugs(locale: BlogLocale): string[] {
+export function getBlogArticle(locale: string, slug: string) {
+  const loc = locale === "en" ? "en" : "pt";
+  return ARTICLES.find((a) => a.locale === loc && a.slug === slug) ?? null;
+}
+
+export function getBlogSlugs(locale: string) {
   return getBlogArticles(locale).map((a) => a.slug);
 }
 
-export function getBlogCategories(locale: BlogLocale): string[] {
-  const set = new Set(getBlogArticles(locale).map((a) => a.category));
-  return Array.from(set);
+export function getBlogCategories(locale: string) {
+  const items = getBlogArticles(locale).map((a) => a.category.trim());
+  return Array.from(new Set(items)).sort((a, b) => a.localeCompare(b));
 }
