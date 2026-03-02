@@ -21,66 +21,20 @@ const ARTICLES: BlogArticle[] = [
     category: "Adventista",
     title: "Família, Fé e Hábitos Simples que Protegem o Lar",
     summary:
-      "Pequenas rotinas espirituais criam uma casa mais segura emocionalmente e mais forte em Deus.",
+      "Pequenas rotinas espirituais criam uma casa mais segura emocionalmente.",
     excerpt:
-      "Quando a fé vira rotina saudável, o lar ganha estabilidade, paz e direção.",
+      "Quando a fé vira rotina saudável, o lar ganha estabilidade e direção.",
     date: "2026-02-28",
     readTime: "4 min",
-    tags: ["familia", "habitos", "vida-espiritual"],
+    tags: ["familia", "habitos"],
     coverImage: "/images/blog/default.jpg",
     content: `
-## Por que hábitos simples mudam tudo
-A maior parte das crises familiares não começa “grande”. Começa pequena: falta de conversa, pressão, ansiedade, fadiga e decisões rápidas.
-
-## 1) Culto familiar curto, consistente e real
-- 8 a 12 minutos são suficientes.
-- Leitura bíblica + 1 ideia prática + oração curta.
-- Melhor constância do que “perfeição”.
-
-## 2) Uma regra de ouro: nunca dormir brigado
-A reconciliação não apaga o problema; ela protege o vínculo enquanto o problema é resolvido com maturidade.
-
-## 3) Planeamento do sábado na sexta
-A preparação reduz stress e protege o espírito do lar no sábado.
-
-## 4) A linguagem que cura
-Troca “tu nunca…” por “eu sinto… quando…”
-É simples, mas muda o clima da casa.
-
-## Leitura recomendada
-Hebreus 10:24-25; Efésios 4:26-32
+## Introdução
+A fé prática fortalece o lar.
 
 ## Ação
-- Fazer um culto familiar hoje (10 min)
-- Escrever 3 gratidões em família
-- Preparar o sábado na sexta
-`,
-  },
-  {
-    locale: "pt",
-    slug: "sabado-e-identidade",
-    category: "Adventista",
-    title: "Sábado e Identidade",
-    summary: "O sábado é descanso, confiança e aliança.",
-    excerpt:
-      "Num mundo acelerado, o sábado é resistência espiritual e reencontro com Deus.",
-    date: "2026-02-20",
-    readTime: "3 min",
-    tags: ["sabado", "identidade", "aliança"],
-    coverImage: "/images/blog/default.jpg",
-    content: `
-## O sábado não é apenas um dia
-É uma mensagem viva: Deus cria, Deus sustenta e Deus salva.
-
-## O que ele protege
-- Mente: desacelera e cura o foco
-- Relacionamentos: volta ao essencial
-- Fé: reforça confiança
-
-## Ação
-- Preparar o sábado na sexta
-- Reduzir o uso do telefone
-- Fazer um momento de gratidão
+- Culto familiar
+- Planeamento do sábado
 `,
   },
 ];
