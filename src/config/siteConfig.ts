@@ -7,5 +7,5 @@ export const siteConfig = {
   locales: ["pt", "en"] as const,
   url:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-    "https://ever-light-journal.vercel.app",
+    "https://ever-light-journal-m5bz.vercel.app",
 };
