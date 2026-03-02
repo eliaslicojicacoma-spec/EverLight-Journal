@@ -1,11 +1,7 @@
 export const siteConfig = {
   name: "EverLight Journal",
-  tagline: "Fé & Sociedade",
   description:
-    "Conectando fé e sociedade de forma equilibrada, bíblica e relevante para os desafios atuais.",
-  defaultLocale: "pt",
-  locales: ["pt", "en"] as const,
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-    "https://ever-light-journal-m5bz.vercel.app",
+    "Conteúdo original sobre Sociedade e Fé Adventista, com qualidade editorial e design moderno.",
+  url: "https://everlight-journal.vercel.app",
+  ogImage: "/og/preview.jpg",
 };
