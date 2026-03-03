@@ -31,6 +31,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/[locale]/blog/[slug]/not-found.js"
+    ],
+    "/[locale]/blog/tags/[tag]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[locale]/blog/tags/[tag]/page.js"
     ]
   }
 }
