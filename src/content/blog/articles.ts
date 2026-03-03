@@ -1,65 +1,108 @@
+import { slugify } from "@/utils/slug";
+
 export type BlogArticle = {
   slug: string;
-  locale: "pt" | "en";
-  title: string;
-  excerpt: string;
-  content: string; // (por agora, string simples; depois trocamos para MDX)
-  category: string;
-  tags?: string[];
-  publishedAt: string; // ISO date
-  updatedAt?: string;  // ISO date
-  readingTime?: number;
-  coverImage?: string;
+
+  title: {
+    pt: string;
+    en: string;
+  };
+
+  excerpt: {
+    pt: string;
+    en: string;
+  };
+
+  content: {
+    pt: string; // por agora string simples (mais tarde podemos suportar MDX/Markdown real)
+    en: string;
+  };
+
+  category: string; // exemplo: "project", "faith", "society"
+  tags: string[]; // exemplo: ["PT/EN", "Projeto", "SEO"]
+
+  publishedAt: string; // ISO: "2026-03-02"
+  updatedAt?: string; // ISO opcional
+  readingTime?: string; // opcional
 };
 
 const articles: BlogArticle[] = [
   {
-    slug: "bem-vindo-ao-everlight",
-    locale: "pt",
-    title: "Bem-vindo ao EverLight Journal",
-    excerpt: "O que é o EverLight, por que existe, e como vais usá-lo no dia a dia.",
-    content:
-      "Este é o teu primeiro artigo. Em seguida vamos ligar isto a páginas de artigo, categoria e SEO.",
-    category: "Sociedade e Fé",
-    tags: ["everlight", "introdução"],
-    publishedAt: "2026-03-03",
-    updatedAt: "2026-03-03",
-    readingTime: 3,
-  },
-  {
-    slug: "welcome-to-everlight",
-    locale: "en",
-    title: "Welcome to EverLight Journal",
-    excerpt: "What EverLight is, why it exists, and how you’ll use it daily.",
-    content:
-      "This is your first EN article. Next we’ll wire this to post pages, category pages, and SEO.",
-    category: "Society & Faith",
-    tags: ["everlight", "intro"],
-    publishedAt: "2026-03-03",
-    updatedAt: "2026-03-03",
-    readingTime: 3,
+    slug: "welcome-to-everlight-journal",
+    title: {
+      pt: "Bem-vindo ao EverLight Journal",
+      en: "Welcome to EverLight Journal",
+    },
+    excerpt: {
+      pt: "A base do projeto está pronta: PT/EN, blog por ficheiro, SEO e estrutura escalável.",
+      en: "The foundation is ready: PT/EN, file-based blog source, SEO and scalable structure.",
+    },
+    content: {
+      pt: `## Olá!
+
+Este é o primeiro artigo do EverLight Journal.
+
+- PT/EN
+- Blog por \`articles.ts\`
+- Estrutura profissional
+`,
+      en: `## Hello!
+
+This is the first article of EverLight Journal.
+
+- PT/EN
+- Blog via \`articles.ts\`
+- Professional structure
+`,
+    },
+    category: "project",
+    tags: ["PT/EN", "Projeto", "SEO"],
+    publishedAt: "2026-03-02",
   },
 ];
 
-export function getBlogArticles(locale?: "pt" | "en") {
-  const list = locale ? articles.filter(a => a.locale === locale) : [...articles];
-  return list.sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
+// -----------------------------
+// Getters (fonte oficial do blog)
+// -----------------------------
+
+export function getBlogArticles(): BlogArticle[] {
+  return [...articles].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
 }
 
-export function getBlogSlugs(locale?: "pt" | "en") {
-  return getBlogArticles(locale).map(a => a.slug);
+export function getBlogArticle(slug: string): BlogArticle | undefined {
+  return articles.find((a) => a.slug === slug);
 }
 
-export function getBlogArticle(slug: string, locale?: "pt" | "en") {
-  const list = getBlogArticles(locale);
-  return list.find(a => a.slug === slug) ?? null;
+export function getBlogSlugs(): string[] {
+  return articles.map((a) => a.slug);
 }
 
-export function getBlogCategories(locale?: "pt" | "en") {
-  const list = getBlogArticles(locale);
-  const map = new Map<string, number>();
-  for (const a of list) map.set(a.category, (map.get(a.category) ?? 0) + 1);
-  return Array.from(map.entries())
-    .map(([name, count]) => ({ name, count }))
-    .sort((a, b) => b.count - a.count);
+export function getBlogCategories(): string[] {
+  const set = new Set(articles.map((a) => a.category).filter(Boolean));
+  return Array.from(set).sort((a, b) => a.localeCompare(b));
 }
+
+export function getBlogTags(): string[] {
+  const set = new Set<string>();
+  for (const a of articles) {
+    for (const t of a.tags || []) set.add(t);
+  }
+  return Array.from(set).sort((a, b) => a.localeCompare(b));
+}
+
+export function getBlogArticlesByCategory(category: string): BlogArticle[] {
+  const c = category.toLowerCase().trim();
+  return getBlogArticles().filter((a) => a.category.toLowerCase() === c);
+}
+
+export function getBlogArticlesByTag(tagOrSlug: string): BlogArticle[] {
+  // Aceita "SEO" ou "seo" ou "pt-en" (slug). Vamos comparar por slugify
+  const target = slugify(tagOrSlug);
+
+  return getBlogArticles().filter((a) => {
+    const tags = a.tags || [];
+    return tags.some((t) => slugify(t) === target);
+  });
+  }
