@@ -28,42 +28,32 @@ export type BlogArticle = {
 
 const articles: BlogArticle[] = [
   {
-    slug: "welcome-to-everlight-journal",
-    title: {
-      pt: "Bem-vindo ao EverLight Journal",
-      en: "Welcome to EverLight Journal",
-    },
-    excerpt: {
-      pt: "A base do projeto está pronta: PT/EN, blog por ficheiro, SEO e estrutura escalável.",
-      en: "The foundation is ready: PT/EN, file-based blog source, SEO and scalable structure.",
-    },
-    content: {
-      pt: `## Olá!
-
-Este é o primeiro artigo do EverLight Journal.
-
-- PT/EN
-- Blog por \`articles.ts\`
-- Estrutura profissional
-`,
-      en: `## Hello!
-
-This is the first article of EverLight Journal.
-
-- PT/EN
-- Blog via \`articles.ts\`
-- Professional structure
-`,
-    },
-    category: "project",
-    tags: ["PT/EN", "Projeto", "SEO"],
-    publishedAt: "2026-03-02",
+    slug: "bem-vindo-ao-everlight",
+    locale: "pt",
+    title: "Bem-vindo ao EverLight Journal",
+    excerpt: "O que é o EverLight, por que existe, e como vais usá-lo no dia a dia.",
+    content:
+      "Este é o teu primeiro artigo. Em seguida vamos ligar isto a páginas de artigo, categoria e SEO.",
+    category: "Sociedade e Fé",
+    tags: ["everlight", "introdução"],
+    publishedAt: "2026-03-03",
+    updatedAt: "2026-03-03",
+    readingTime: 3,
+  },
+  {
+    slug: "welcome-to-everlight",
+    locale: "en",
+    title: "Welcome to EverLight Journal",
+    excerpt: "What EverLight is, why it exists, and how you’ll use it daily.",
+    content:
+      "This is your first EN article. Next we’ll wire this to post pages, category pages, and SEO.",
+    category: "Society & Faith",
+    tags: ["everlight", "intro"],
+    publishedAt: "2026-03-03",
+    updatedAt: "2026-03-03",
+    readingTime: 3,
   },
 ];
-
-// -----------------------------
-// Getters (fonte oficial do blog)
-// -----------------------------
 
 export function getBlogArticles(): BlogArticle[] {
   return [...articles].sort(
