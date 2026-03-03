@@ -1,75 +1,99 @@
 import Link from "next/link";
-import { getBlogArticlesByTag, getBlogTags } from "@/content/blog/articles";
-import { unslugify } from "@/utils/slug";
+import { redirect } from "next/navigation";
+
+import { getBlogArticles } from "@/content/blog/articles";
+
+// Se já tens slugify em src/utils/slugify.ts, importa daqui em vez disso.
+// Ex: import { slugify } from "@/utils/slugify";
+function slugify(input: string) {
+  return input
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
 
 type PageProps = {
   params: { locale: string; tag: string };
 };
 
-export default function BlogTagPage({ params }: PageProps) {
-  const { locale, tag } = params;
+export default function TagPage({ params }: PageProps) {
+  const locale = params.locale;
+  const rawTagParam = decodeURIComponent(params.tag);
 
-  const articles = getBlogArticlesByTag(tag);
-  const humanTag = unslugify(tag);
+  // Canonical slug (sempre minúsculo)
+  const canonicalTagSlug = slugify(rawTagParam);
+
+  // Se o user abriu com maiúsculas/espacos/etc, redireciona pro canonical
+  if (params.tag !== canonicalTagSlug) {
+    redirect(`/${locale}/blog/tags/${canonicalTagSlug}`);
+  }
+
+  const articles = getBlogArticles(locale);
+
+  // Match por slug da tag (não por texto exato)
+  const filtered = articles.filter((a) =>
+    (a.tags ?? []).some((t) => slugify(t) === canonicalTagSlug)
+  );
+
+  // Se não encontrou, mostra página simples (ou podes chamar notFound())
+  if (filtered.length === 0) {
+    return (
+      <main className="mx-auto max-w-3xl px-4 py-10">
+        <h1 className="text-2xl font-semibold">Tag não encontrada</h1>
+        <p className="mt-2 text-sm text-zinc-400">
+          Não há artigos com esta tag.
+        </p>
+
+        <div className="mt-6">
+          <Link
+            href={`/${locale}/blog/tags`}
+            className="inline-flex rounded-lg border border-white/10 px-4 py-2 text-sm hover:bg-white/5"
+          >
+            Voltar às tags
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
+  // Pega o “nome bonito” (primeira tag real encontrada)
+  const displayName =
+    filtered[0]?.tags?.find((t) => slugify(t) === canonicalTagSlug) ??
+    rawTagParam;
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-4 py-10">
-      <div className="mb-8">
-        <p className="text-sm text-zinc-400">
-          <Link href={`/${locale}/blog`} className="hover:underline">
-            Blog
-          </Link>{" "}
-          <span className="text-zinc-600">/</span>{" "}
-          <span className="text-zinc-300">Tag</span>
-        </p>
-
-        <h1 className="mt-2 text-3xl font-semibold text-zinc-100">
-          Tag: <span className="text-zinc-200">#{humanTag}</span>
-        </h1>
-
-        <p className="mt-2 text-zinc-400">
-          {articles.length} artigo(s) com esta tag.
-        </p>
+    <main className="mx-auto max-w-3xl px-4 py-10">
+      <div className="mb-6">
+        <Link
+          href={`/${locale}/blog/tags`}
+          className="text-sm text-zinc-400 hover:text-zinc-200"
+        >
+          ← Voltar às tags
+        </Link>
       </div>
 
-      {articles.length === 0 ? (
-        <div className="rounded-xl border border-white/10 bg-white/5 p-6 text-zinc-300">
-          Nada encontrado para esta tag.
-        </div>
-      ) : (
-        <div className="space-y-4">
-          {articles.map((a) => (
-            <Link
-              key={a.slug}
-              href={`/${locale}/blog/${a.slug}`}
-              className="block rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/10"
-            >
-              <div className="text-xs text-zinc-400">{a.publishedAt}</div>
-              <div className="mt-1 text-lg font-semibold text-zinc-100">
-                {locale === "en" ? a.title.en : a.title.pt}
-              </div>
-              <div className="mt-1 text-zinc-300">
-                {locale === "en" ? a.excerpt.en : a.excerpt.pt}
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
+      <h1 className="text-3xl font-semibold">{displayName}</h1>
+      <p className="mt-2 text-sm text-zinc-400">
+        {filtered.length} artigo(s) nesta tag.
+      </p>
 
-      <div className="mt-10 rounded-xl border border-white/10 bg-white/5 p-5">
-        <div className="text-sm font-semibold text-zinc-100">Outras tags</div>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {getBlogTags().map((t) => (
-            <Link
-              key={t}
-              href={`/${locale}/blog/tag/${encodeURIComponent(t.toLowerCase().trim().replace(/\s+/g, "-"))}`}
-              className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-200 hover:bg-white/10"
-            >
-              #{t}
-            </Link>
-          ))}
-        </div>
+      <div className="mt-8 space-y-3">
+        {filtered.map((a) => (
+          <Link
+            key={a.slug}
+            href={`/${locale}/blog/${a.slug}`}
+            className="block rounded-xl border border-white/10 p-4 hover:bg-white/5"
+          >
+            <div className="text-lg font-medium">{a.title}</div>
+            {a.excerpt ? (
+              <div className="mt-1 text-sm text-zinc-400">{a.excerpt}</div>
+            ) : null}
+          </Link>
+        ))}
       </div>
     </main>
   );
-                }
+      }
