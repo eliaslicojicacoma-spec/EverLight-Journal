@@ -2,21 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------------------------- */
+/* ROOT CONFIG */
+/* ------------------------------- */
+
 :root {
   color-scheme: dark;
 }
 
+/* ------------------------------- */
+/* BODY */
+/* ------------------------------- */
+
 html,
 body {
   height: 100%;
+  background: #09090b;
+  color: #fafafa;
+  font-feature-settings: "rlig" 1, "calt" 1;
 }
+
+/* ------------------------------- */
+/* TEXT SELECTION */
+/* ------------------------------- */
+
+::selection {
+  background: #6366f1;
+  color: white;
+}
+
+/* ------------------------------- */
+/* LINKS */
+/* ------------------------------- */
+
+a {
+  @apply text-indigo-400 transition-colors;
+}
+
+a:hover {
+  @apply text-indigo-300;
+}
+
+/* ------------------------------- */
+/* SCROLLBAR */
+/* ------------------------------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* ------------------------------- */
+/* PREMIUM CARDS */
+/* ------------------------------- */
+
 .premium-card {
-  @apply rounded-2xl border border-white/10 bg-white/5 shadow-[0_20px_80px_-40px_rgba(0,0,0,0.9)] backdrop-blur;
+  @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur shadow-[0_20px_80px_-40px_rgba(0,0,0,0.9)] transition-all;
 }
 
 .premium-card:hover {
   @apply border-white/20 bg-white/10;
 }
+
+/* ------------------------------- */
+/* TITLES */
+/* ------------------------------- */
 
 .premium-title {
   @apply text-3xl font-bold tracking-tight;
@@ -24,4 +86,40 @@ body {
 
 .premium-subtitle {
   @apply text-zinc-300;
+}
+
+/* ------------------------------- */
+/* ARTICLE STYLING */
+/* ------------------------------- */
+
+.article-content h1 {
+  @apply text-4xl font-bold mt-8 mb-4;
+}
+
+.article-content h2 {
+  @apply text-3xl font-semibold mt-8 mb-4;
+}
+
+.article-content h3 {
+  @apply text-2xl font-semibold mt-6 mb-3;
+}
+
+.article-content p {
+  @apply text-zinc-300 leading-7 mb-4;
+}
+
+.article-content strong {
+  @apply text-white;
+}
+
+.article-content blockquote {
+  @apply border-l-4 border-indigo-500 pl-4 italic text-zinc-300 my-6;
+}
+
+/* ------------------------------- */
+/* CONTAINER */
+/* ------------------------------- */
+
+.container-xl {
+  @apply max-w-5xl mx-auto px-4;
 }
