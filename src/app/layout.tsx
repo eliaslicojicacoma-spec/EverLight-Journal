@@ -1,37 +1,25 @@
-import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import "@/styles/globals.css";
+import type { Metadata } from "next";
+import { siteConfig } from "@/config/siteConfig";
 
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "EverLight Journal",
-    template: "%s | EverLight Journal",
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Portal cristão dedicado à reflexão bíblica, sociedade, fé e pensamento cristão.",
-
-  openGraph: {
-    title: "EverLight Journal",
-    description:
-      "Artigos sobre fé, sociedade, espiritualidade e pensamento cristão.",
-    url: "https://everlight-journal.com",
-    siteName: "EverLight Journal",
-    locale: "pt_PT",
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "EverLight Journal",
-    description:
-      "Artigos sobre fé, sociedade e espiritualidade.",
-  },
+  description: siteConfig.description,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="pt" suppressHydrationWarning>
-      <body className="min-h-screen bg-[#F6F4EF] text-[#121212] antialiased dark:bg-zinc-950 dark:text-white">
-        <ThemeProvider>{children}</ThemeProvider>
+      <body className="min-h-dvh bg-zinc-950 text-zinc-100 antialiased">
+        {children}
       </body>
     </html>
   );
