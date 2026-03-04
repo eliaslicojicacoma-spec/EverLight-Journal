@@ -1,6 +1,8 @@
 {
-  "/[locale]/blog/tags/[tag]/page": "app/[locale]/blog/tags/[tag]/page.js",
+  "/page": "app/page.js",
+  "/[locale]/blog/category/[category]/page": "app/[locale]/blog/category/[category]/page.js",
+  "/[locale]/blog/categories/page": "app/[locale]/blog/categories/page.js",
   "/[locale]/blog/page": "app/[locale]/blog/page.js",
   "/[locale]/blog/[slug]/page": "app/[locale]/blog/[slug]/page.js",
-  "/[locale]/blog/category/[category]/page": "app/[locale]/blog/category/[category]/page.js"
+  "/[locale]/blog/tags/[tag]/page": "app/[locale]/blog/tags/[tag]/page.js"
 }
