@@ -2,8 +2,29 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata = {
-  title: "EverLight Journal",
-  description: "Sociedade com visão global, fé com profundidade.",
+  title: {
+    default: "EverLight Journal",
+    template: "%s | EverLight Journal",
+  },
+  description:
+    "Portal cristão dedicado à reflexão bíblica, sociedade, fé e pensamento cristão.",
+
+  openGraph: {
+    title: "EverLight Journal",
+    description:
+      "Artigos sobre fé, sociedade, espiritualidade e pensamento cristão.",
+    url: "https://everlight-journal.com",
+    siteName: "EverLight Journal",
+    locale: "pt_PT",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "EverLight Journal",
+    description:
+      "Artigos sobre fé, sociedade e espiritualidade.",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
