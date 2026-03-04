@@ -1,35 +1,34 @@
-import type { MetadataRoute } from "next";
+import { MetadataRoute } from "next";
 import { siteConfig } from "@/config/siteConfig";
+import { getBlogArticles } from "@/content/blog/articles";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = siteConfig.url;
-  const now = new Date();
+  const baseUrl = siteConfig.url;
 
-  const paths = [
-    "",
-    "/society",
-    "/adventist",
-    "/library",
-    "/blog",
-    "/donate",
-    "/contact",
-    "/subscribe",
-    "/verse-of-day",
-    "/about",
-    "/privacy",
-    "/terms",
+  const articles = getBlogArticles();
+
+  const blogUrls = articles.map((article) => ({
+    url: `${baseUrl}/pt/blog/${article.slug}`,
+    lastModified: new Date(article.date),
+  }));
+
+  return [
+    {
+      url: `${baseUrl}`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/pt/blog`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/pt/blog/categories`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/pt/blog/tags`,
+      lastModified: new Date(),
+    },
+    ...blogUrls,
   ];
-
-  const urls: MetadataRoute.Sitemap = [];
-
-  for (const locale of siteConfig.locales) {
-    for (const p of paths) {
-      urls.push({
-        url: `${base}/${locale}${p}`,
-        lastModified: now,
-      });
-    }
-  }
-
-  return urls;
 }
