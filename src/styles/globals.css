@@ -10,3 +10,18 @@ html,
 body {
   height: 100%;
 }
+.premium-card {
+  @apply rounded-2xl border border-white/10 bg-white/5 shadow-[0_20px_80px_-40px_rgba(0,0,0,0.9)] backdrop-blur;
+}
+
+.premium-card:hover {
+  @apply border-white/20 bg-white/10;
+}
+
+.premium-title {
+  @apply text-3xl font-bold tracking-tight;
+}
+
+.premium-subtitle {
+  @apply text-zinc-300;
+}
