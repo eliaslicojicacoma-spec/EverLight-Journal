@@ -16,7 +16,7 @@ function tagToSlug(tag: string) {
 export default function BlogTagsPage({ params }: PageProps) {
   const { locale } = params;
 
-  const articles = getBlogArticles(locale);
+  const articles = getBlogArticles();
   const counts = new Map<string, number>();
 
   for (const a of articles) {

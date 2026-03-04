@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { getBlogArticles } from "@/content/blog/articles";
+import { t } from "@/lib/i18nText";
 
 // Se já tens slugify em src/utils/slugify.ts, importa daqui em vez disso.
 // Ex: import { slugify } from "@/utils/slugify";
@@ -31,7 +32,7 @@ export default function TagPage({ params }: PageProps) {
     redirect(`/${locale}/blog/tags/${canonicalTagSlug}`);
   }
 
-  const articles = getBlogArticles(locale);
+  const articles = getBlogArticles();
 
   // Match por slug da tag (não por texto exato)
   const filtered = articles.filter((a) =>
@@ -87,9 +88,9 @@ export default function TagPage({ params }: PageProps) {
             href={`/${locale}/blog/${a.slug}`}
             className="block rounded-xl border border-white/10 p-4 hover:bg-white/5"
           >
-            <div className="text-lg font-medium">{a.title}</div>
+            <div className="text-lg font-medium">{t((a as any).title, params.locale)}</div>
             {a.excerpt ? (
-              <div className="mt-1 text-sm text-zinc-400">{a.excerpt}</div>
+              <div className="mt-1 text-sm text-zinc-400">{t((a as any).excerpt, params.locale)}</div>
             ) : null}
           </Link>
         ))}

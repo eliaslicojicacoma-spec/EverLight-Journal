@@ -19,7 +19,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  const base = `https://${siteConfig.domain}`;
+  const base = siteConfig.url;
   const url = `${base}/${locale}/team`;
   const title = locale === "pt" ? "Equipe" : "Team";
   const description =

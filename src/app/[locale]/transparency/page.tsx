@@ -9,7 +9,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  const base = `https://${siteConfig.domain}`;
+  const base = siteConfig.url;
   const url = `${base}/${locale}/transparency`;
   const title = locale === "pt" ? "Transparência" : "Transparency";
   const description =
@@ -108,7 +108,7 @@ export default async function TransparencyPage({
             ? "Pedidos de correção, parceria ou dúvidas:"
             : "Corrections, partnerships, or questions:"}
         </p>
-        <p className="mt-2 text-sm font-extrabold">{siteConfig.email}</p>
+        <p className="mt-2 text-sm font-extrabold">{"eliaslicojicacoma@gmail.com"}</p>
       </section>
     </div>
   );

@@ -1,6 +1,7 @@
 import { getBlogArticles } from "@/content/blog/articles";
 import Container from "@/components/layout/Container";
 import Link from "next/link";
+import { t } from "@/lib/i18nText";
 
 type Props = {
   params: {
@@ -32,9 +33,9 @@ export default function CategoryPage({ params }: Props) {
             key={article.slug}
             className="border border-zinc-700 rounded-lg p-5"
           >
-            <h2 className="text-xl font-semibold">{article.title}</h2>
+            <h2 className="text-xl font-semibold">{t(article.title as any, params.locale)}</h2>
 
-            <p className="text-sm opacity-70 mb-2">{article.date}</p>
+            <p className="text-sm opacity-70 mb-2">{(article as any).date}</p>
 
             <Link
               href={`/${params.locale}/blog/${article.slug}`}

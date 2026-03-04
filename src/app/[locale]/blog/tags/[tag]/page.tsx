@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBlogArticles } from "@/content/blog/articles";
+import { t } from "@/lib/i18nText";
 
 type PageProps = {
   params: { locale: string; tag: string };
@@ -24,7 +25,7 @@ export default function BlogTagPage({ params }: PageProps) {
   const tagLabel = decodeTagSlug(tag);
   const tagNorm = normalizeTag(tagLabel);
 
-  const articles = getBlogArticles(locale);
+  const articles = getBlogArticles();
 
   const filtered = articles.filter((a) =>
     (a.tags ?? []).some((t) => normalizeTag(t) === tagNorm)
@@ -49,9 +50,9 @@ export default function BlogTagPage({ params }: PageProps) {
             href={`/${locale}/blog/${a.slug}`}
             className="block rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:bg-white/[0.06]"
           >
-            <div className="text-lg font-medium text-zinc-100">{a.title}</div>
+            <div className="text-lg font-medium text-zinc-100">{t((a as any).title, params.locale)}</div>
             {a.excerpt ? (
-              <p className="mt-2 text-sm text-zinc-400">{a.excerpt}</p>
+              <p className="mt-2 text-sm text-zinc-400">{t((a as any).excerpt, params.locale)}</p>
             ) : null}
 
             <div className="mt-3 flex flex-wrap gap-2">
