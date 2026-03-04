@@ -1,18 +1,16 @@
 import type { Config } from "tailwindcss";
 
-export default {
-  darkMode: "class",
+const config: Config = {
   content: [
-    "./src/app/**/*.{ts,tsx}",
-    "./src/components/**/*.{ts,tsx}",
-    "./src/hooks/**/*.{ts,tsx}"
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/content/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ["Inter", "system-ui", "Segoe UI", "Roboto", "Arial"]
-      }
-    }
+    extend: {},
   },
-  plugins: []
-} satisfies Config;
+  plugins: [],
+};
+
+export default config;
