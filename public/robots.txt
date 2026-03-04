@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://ever-light-journal-m5bz.vercel.app/sitemap.xml
