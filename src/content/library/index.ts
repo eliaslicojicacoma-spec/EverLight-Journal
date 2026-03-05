@@ -1,21 +1,25 @@
-import { libraryItems, type LibraryItem } from "./items";
+export type LibraryLocale = "pt" | "en";
 
-export function getLibraryItems() {
-  return [...libraryItems];
+export type LibraryItem = {
+  slug: string;
+  title: { pt: string; en: string };
+  author?: { pt: string; en: string };
+  description?: { pt: string; en: string };
+  tags?: string[];
+  pdf?: string; // ex: "/downloads/algum.pdf"
+  externalUrl?: string; // ex: "https://..."
+};
+
+import { libraryItems } from "./items";
+
+export function getLibraryItems(): LibraryItem[] {
+  return libraryItems;
 }
 
-export function getLibrarySlugs() {
-  return libraryItems.map((i) => i.slug);
+export function getLibrarySlugs(): string[] {
+  return libraryItems.map((x) => x.slug);
 }
 
 export function getLibraryItem(slug: string): LibraryItem | undefined {
-  return libraryItems.find((i) => i.slug === slug);
-}
-
-export function getLibraryTags(): string[] {
-  const set = new Set<string>();
-  for (const item of libraryItems) {
-    for (const t of item.tags ?? []) set.add(t);
-  }
-  return Array.from(set).sort((a, b) => a.localeCompare(b));
+  return libraryItems.find((x) => x.slug === slug);
 }
