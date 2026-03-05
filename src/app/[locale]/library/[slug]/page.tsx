@@ -1,4 +1,3 @@
-HEAD
 type Props = {
   params: {
     locale: string;
@@ -8,36 +7,12 @@ type Props = {
 
 export default function LibrarySlugPage({ params }: Props) {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-20">
-      <h1 className="text-4xl font-bold mb-6">Biblioteca – {params.slug}</h1>
+    <main className="max-w-4xl mx-auto px-6 py-10">
+      <h1 className="text-4xl font-bold mb-6">Biblioteca</h1>
 
       <p className="text-zinc-400">
-        Esta página será usada para mostrar recursos da biblioteca como livros,
-        revistas e materiais cristãos.
+        Esta página será usada para mostrar livros, revistas e materiais cristãos.
       </p>
     </main>
   );
 }
-
-type Props = {
-  params: {
-    locale: string;
-    slug: string;
-  };
-};
-
-export default function LibrarySlugPage({ params }: Props) {
-  return (
-    <main className="max-w-4xl mx-auto px-6 py-20">
-      <h1 className="text-4xl font-bold mb-6">
-        Biblioteca – {params.slug}
-      </h1>
-
-      <p className="text-zinc-400">
-        Esta página será usada para mostrar recursos da biblioteca
-        como livros, revistas e materiais cristãos.
-      </p>
-    </main>
-  );
-}
-6362425d3e68d4595e168629a8d67e61ea82a44e
