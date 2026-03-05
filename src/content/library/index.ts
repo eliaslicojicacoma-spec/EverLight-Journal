@@ -1,38 +1,49 @@
+export type LibraryLocaleText = {
+  pt: string;
+  en: string;
+};
+
 export type LibraryItem = {
-  slug: string
-  title: { pt: string; en: string }
-  author?: { pt: string; en: string }
-  description?: { pt: string; en: string }
-  pdf?: string
-  externalUrl?: string
-}
+  slug: string;
+  title: LibraryLocaleText;
+  author?: LibraryLocaleText;
+  description?: LibraryLocaleText;
 
-export const libraryItems: LibraryItem[] = [
-  {
-    slug: "conflito-dos-seculos",
-    title: {
-      pt: "O Conflito dos Séculos",
-      en: "The Great Controversy",
-    },
-    author: {
-      pt: "Ellen G. White",
-      en: "Ellen G. White",
-    },
-    description: {
-      pt: "Uma obra clássica sobre o conflito entre o bem e o mal na história.",
-      en: "A classic book about the conflict between good and evil.",
-    },
-  },
-]
+  // links/opções de recurso
+  pdf?: string;          // ex: "/downloads/arquivo.pdf"
+  url?: string;          // ex: "https://..."
+  coverImage?: string;   // ex: "/images/capas/xxx.jpg"
 
+  // ✅ agora existe (resolve o teu erro)
+  tags?: string[];
+  category?: string;
+
+  // metadados
+  publishedAt?: string;  // "2026-03-05"
+};
+
+import { libraryItems } from "./items";
+
+/** Todos os itens */
 export function getLibraryItems(): LibraryItem[] {
-  return libraryItems
+  return libraryItems;
 }
 
-export function getLibrarySlugs(): string[] {
-  return libraryItems.map((item) => item.slug)
-}
-
+/** Um item por slug */
 export function getLibraryItem(slug: string): LibraryItem | undefined {
-  return libraryItems.find((item) => item.slug === slug)
+  return libraryItems.find((i) => i.slug === slug);
+}
+
+/** Slugs (para rotas estáticas) */
+export function getLibrarySlugs(): string[] {
+  return libraryItems.map((i) => i.slug);
+}
+
+/** Tags únicas */
+export function getLibraryTags(): string[] {
+  const set = new Set<string>();
+  for (const item of libraryItems) {
+    for (const t of item.tags ?? []) set.add(t);
+  }
+  return Array.from(set).sort((a, b) => a.localeCompare(b));
 }
